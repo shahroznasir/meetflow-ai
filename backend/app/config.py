@@ -3,8 +3,14 @@ from typing import Optional
 import os
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-DEFAULT_DB_FILE = os.path.join(BASE_DIR, "meetings.db").replace("\\", "/")
-DEFAULT_STORAGE_DIR = os.path.join(BASE_DIR, "storage")
+IS_VERCEL = bool(os.getenv("VERCEL"))
+if IS_VERCEL:
+    DEFAULT_STORAGE_DIR = "/tmp/storage"
+    DEFAULT_DB_FILE = "/tmp/meetings.db"
+else:
+    DEFAULT_STORAGE_DIR = os.path.join(BASE_DIR, "storage")
+    DEFAULT_DB_FILE = os.path.join(BASE_DIR, "meetings.db").replace("\\", "/")
+
 
 class Settings(BaseSettings):
     GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
@@ -34,5 +40,9 @@ class Settings(BaseSettings):
 settings = Settings()
 
 # Ensure storage directories exist
-os.makedirs(os.path.join(settings.STORAGE_DIR, settings.RAW_AUDIO_SUBDIR), exist_ok=True)
-os.makedirs(os.path.join(settings.STORAGE_DIR, settings.PDF_SUBDIR), exist_ok=True)
+try:
+    os.makedirs(os.path.join(settings.STORAGE_DIR, settings.RAW_AUDIO_SUBDIR), exist_ok=True)
+    os.makedirs(os.path.join(settings.STORAGE_DIR, settings.PDF_SUBDIR), exist_ok=True)
+except Exception:
+    pass
+

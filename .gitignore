@@ -36,6 +36,9 @@ backend/storage/audio_raw/*
 backend/storage/pdf_reports/*
 
 # Databases & local journals
+*.db
+*.sqlite
+*.sqlite3
 *.db-journal
 *.sqlite3-journal
 
