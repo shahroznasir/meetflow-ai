@@ -89,27 +89,36 @@ In addition, generate the executive summary, agenda topics, decisions, action it
 
         # If live Gemini Client is available, call Gemini API
         if self.client:
-            try:
-                audio_part = types.Part.from_bytes(
-                    data=audio_bytes,
-                    mime_type=mime_type
-                )
+            candidates = [settings.GEMINI_MODEL, "gemini-2.5-flash", "gemini-1.5-flash", "gemini-2.5-pro"]
+            seen = set()
+            model_list = [m for m in candidates if m and not (m in seen or seen.add(m))]
 
-                response = self.client.models.generate_content(
-                    model=settings.GEMINI_MODEL,
-                    contents=[audio_part, prompt_text],
-                    config=types.GenerateContentConfig(
-                        system_instruction=MOM_SYSTEM_INSTRUCTION,
-                        response_mime_type="application/json",
-                        response_schema=MeetingMinutesPackage,
-                        temperature=0.2
+            for model_name in model_list:
+                try:
+                    audio_part = types.Part.from_bytes(
+                        data=audio_bytes,
+                        mime_type=mime_type
                     )
-                )
 
-                raw_json = response.text
-                return MeetingMinutesPackage.model_validate_json(raw_json)
-            except Exception as e:
-                logger.error(f"Gemini API invocation error: {e}. Falling back to intelligent structured processor.")
+                    response = self.client.models.generate_content(
+                        model=model_name,
+                        contents=[audio_part, prompt_text],
+                        config=types.GenerateContentConfig(
+                            system_instruction=MOM_SYSTEM_INSTRUCTION,
+                            response_mime_type="application/json",
+                            response_schema=MeetingMinutesPackage,
+                            temperature=0.2
+                        )
+                    )
+
+                    raw_json = response.text
+                    settings.GEMINI_MODEL = model_name
+                    return MeetingMinutesPackage.model_validate_json(raw_json)
+                except Exception as e:
+                    logger.warning(f"Gemini API model {model_name} invocation error: {e}")
+                    if "404" in str(e) or "NOT_FOUND" in str(e):
+                        continue
+                    break
 
         # Fallback / Mock Generator for offline testing or missing API key
         return self._generate_mock_minutes(meeting_title, known_participants)
@@ -291,42 +300,54 @@ Your mission:
         messages_content.append(f"USER: {question}")
         full_prompt = "\n\n".join(messages_content)
 
-        try:
-            response = self.client.models.generate_content(
-                model=settings.GEMINI_MODEL,
-                contents=full_prompt,
-                config=types.GenerateContentConfig(
-                    system_instruction=system_instruction,
-                    temperature=0.3
+        candidates = [settings.GEMINI_MODEL, "gemini-2.5-flash", "gemini-1.5-flash", "gemini-2.5-pro"]
+        seen = set()
+        model_list = [m for m in candidates if m and not (m in seen or seen.add(m))]
+
+        last_error = ""
+        for model_name in model_list:
+            try:
+                response = self.client.models.generate_content(
+                    model=model_name,
+                    contents=full_prompt,
+                    config=types.GenerateContentConfig(
+                        system_instruction=system_instruction,
+                        temperature=0.3
+                    )
                 )
-            )
 
-            raw_text = response.text or ""
-            follow_ups = []
-            if "---FOLLOW_UPS---" in raw_text:
-                parts = raw_text.split("---FOLLOW_UPS---")
-                answer = parts[0].strip()
-                for line in parts[1].strip().split("\n"):
-                    cleaned = line.strip().lstrip("-").lstrip("*").strip()
-                    if cleaned:
-                        follow_ups.append(cleaned)
-            else:
-                answer = raw_text.strip()
-                follow_ups = [
-                    "What were the next steps agreed upon?",
-                    "Draft an email recap to all attendees",
-                    "What questions were left unanswered?"
-                ]
+                raw_text = response.text or ""
+                follow_ups = []
+                if "---FOLLOW_UPS---" in raw_text:
+                    parts = raw_text.split("---FOLLOW_UPS---")
+                    answer = parts[0].strip()
+                    for line in parts[1].strip().split("\n"):
+                        cleaned = line.strip().lstrip("-").lstrip("*").strip()
+                        if cleaned:
+                            follow_ups.append(cleaned)
+                else:
+                    answer = raw_text.strip()
+                    follow_ups = [
+                        "What were the next steps agreed upon?",
+                        "Draft an email recap to all attendees",
+                        "What questions were left unanswered?"
+                    ]
 
-            return {
-                "answer": answer,
-                "suggested_followups": follow_ups[:3]
-            }
-        except Exception as e:
-            logger.error(f"Ask Fred Gemini chat error: {e}")
-            return {
-                "answer": f"I ran into an issue analyzing the meeting: {str(e)}",
-                "suggested_followups": ["Can you summarize the meeting?", "What action items were assigned?"]
-            }
+                settings.GEMINI_MODEL = model_name
+                return {
+                    "answer": answer,
+                    "suggested_followups": follow_ups[:3]
+                }
+            except Exception as e:
+                last_error = str(e)
+                logger.warning(f"Ask Aura Gemini chat error on {model_name}: {e}")
+                if "404" in last_error or "NOT_FOUND" in last_error:
+                    continue
+                break
+
+        return {
+            "answer": f"I ran into an issue analyzing the meeting: {last_error}",
+            "suggested_followups": ["Can you summarize the meeting?", "What action items were assigned?"]
+        }
 
 gemini_service = GeminiService()

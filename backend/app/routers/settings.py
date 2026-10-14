@@ -50,18 +50,31 @@ def update_gemini_api_key(payload: APIKeyPayload):
 
 @router.post("/test")
 async def test_gemini_connection():
-    """Tests the configured Gemini API key with a fast ping."""
+    """Tests the configured Gemini API key with a fast ping, auto-discovering available models."""
     if not gemini_service.client:
         return {"success": False, "error": "Gemini client is not initialized. Please provide a valid Gemini API key first."}
-    try:
-        response = gemini_service.client.models.generate_content(
-            model=settings.GEMINI_MODEL,
-            contents="Hello! Confirm connection in 3 words."
-        )
-        return {
-            "success": True,
-            "model": settings.GEMINI_MODEL,
-            "reply": response.text.strip() if response and response.text else "Connected"
-        }
-    except Exception as e:
-        return {"success": False, "error": str(e)}
+    
+    candidates = [settings.GEMINI_MODEL, "gemini-2.5-flash", "gemini-1.5-flash", "gemini-2.5-pro", "gemini-1.5-pro"]
+    seen = set()
+    model_list = [m for m in candidates if m and not (m in seen or seen.add(m))]
+
+    last_error = ""
+    for model_name in model_list:
+        try:
+            response = gemini_service.client.models.generate_content(
+                model=model_name,
+                contents="Hello! Confirm connection in 3 words."
+            )
+            settings.GEMINI_MODEL = model_name
+            return {
+                "success": True,
+                "model": model_name,
+                "reply": response.text.strip() if response and response.text else "Connected"
+            }
+        except Exception as e:
+            last_error = str(e)
+            if "404" in last_error or "NOT_FOUND" in last_error or "not found" in last_error.lower():
+                continue
+            return {"success": False, "error": last_error}
+
+    return {"success": False, "error": last_error}
