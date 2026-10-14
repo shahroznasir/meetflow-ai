@@ -181,24 +181,45 @@ def get_meeting_details(meeting_id: int, db: Session = Depends(get_db)):
         ],
         "minutes": mom_data,
         "has_pdf": bool(meeting.pdf_path and os.path.exists(meeting.pdf_path)),
-        "has_audio": bool(meeting.audio_path and os.path.exists(meeting.audio_path)),
-        "audio_url": f"/api/v1/meetings/{meeting.id}/audio" if meeting.audio_path and os.path.exists(meeting.audio_path) else None
+        "has_audio": bool(meeting.audio_path and _resolve_audio_path(meeting.audio_path)),
+        "audio_url": f"/api/v1/meetings/{meeting.id}/audio" if meeting.audio_path and _resolve_audio_path(meeting.audio_path) else None
     }
+
+def _resolve_audio_path(path: str) -> Optional[str]:
+    if not path:
+        return None
+    if os.path.exists(path):
+        return path
+    fname = os.path.basename(path)
+    base_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+    candidates = [
+        os.path.join(base_dir, "storage", "audio_raw", fname),
+        os.path.join(settings.STORAGE_DIR, settings.RAW_AUDIO_SUBDIR, fname),
+        os.path.join(os.getcwd(), "backend", "storage", "audio_raw", fname),
+        os.path.join(os.getcwd(), "storage", "audio_raw", fname)
+    ]
+    for c in candidates:
+        if os.path.exists(c):
+            return c
+    return None
 
 @router.get("/{meeting_id}/audio")
 def stream_meeting_audio(meeting_id: int, db: Session = Depends(get_db)):
     """Streams the raw audio recording for in-browser playback."""
     meeting = db.query(Meeting).filter(Meeting.id == meeting_id).first()
-    if not meeting or not meeting.audio_path or not os.path.exists(meeting.audio_path):
+    if not meeting or not meeting.audio_path:
+        raise HTTPException(status_code=404, detail="Audio file not found")
+    resolved = _resolve_audio_path(meeting.audio_path)
+    if not resolved:
         raise HTTPException(status_code=404, detail="Audio file not found")
     media_type = "audio/webm"
-    if meeting.audio_path.endswith(".wav"):
+    if resolved.endswith(".wav"):
         media_type = "audio/wav"
-    elif meeting.audio_path.endswith(".mp3"):
+    elif resolved.endswith(".mp3"):
         media_type = "audio/mpeg"
-    elif meeting.audio_path.endswith(".ogg"):
+    elif resolved.endswith(".ogg"):
         media_type = "audio/ogg"
-    return FileResponse(meeting.audio_path, media_type=media_type)
+    return FileResponse(resolved, media_type=media_type)
 
 @router.post("/{meeting_id}/reprocess")
 async def reprocess_meeting_recording(meeting_id: int, db: Session = Depends(get_db)):

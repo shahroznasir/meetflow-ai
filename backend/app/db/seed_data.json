@@ -1,0 +1,68 @@
+{
+  "meeting": {
+    "id": 1,
+    "title": "Product Strategy & AI Architecture Sync",
+    "source": "web_extension",
+    "status": "completed",
+    "duration_seconds": 22,
+    "audio_path": "C:\\Users\\Acer\\.gemini\\antigravity\\scratch\\ai-meeting-agent\\backend\\storage\\audio_raw\\demo_meeting_audio.wav",
+    "pdf_path": "./storage\\pdf_reports\\MoM_Meeting_1.pdf",
+    "email_sent": 0,
+    "created_at": "2026-10-09 11:44:39.556457",
+    "updated_at": "2026-10-09 12:02:27.701908"
+  },
+  "participants": [
+    {
+      "id": 1,
+      "meeting_id": 1,
+      "name": "David Miller",
+      "email": "david.miller@meetflow.ai",
+      "role": "host"
+    },
+    {
+      "id": 2,
+      "meeting_id": 1,
+      "name": "Zira Chen",
+      "email": "zira.chen@meetflow.ai",
+      "role": "attendee"
+    }
+  ],
+  "action_items": [
+    {
+      "id": 1,
+      "meeting_id": 1,
+      "task": "Finalize backend API documentation and circulate with the team",
+      "assignee_name": "Host",
+      "assignee_email": null,
+      "due_date": "End of Week",
+      "priority": "High",
+      "status": "Pending",
+      "context_quote": "'Host: I will finalize the backend API docs and send them over by Friday.'",
+      "created_at": "2026-10-13 06:17:12.842560"
+    },
+    {
+      "id": 2,
+      "meeting_id": 1,
+      "task": "Verify extension audio capture on Microsoft Teams and Google Meet",
+      "assignee_name": "Attendee",
+      "assignee_email": null,
+      "due_date": "Next Monday",
+      "priority": "Medium",
+      "status": "Pending",
+      "context_quote": "'Attendee: Let me handle testing across both Meet and Teams.'",
+      "created_at": "2026-10-13 06:17:12.842574"
+    }
+  ],
+  "summary": {
+    "id": 1,
+    "meeting_id": 1,
+    "executive_summary": "During this session, Host and Attendee reviewed project milestones, timeline expectations, and integration priorities. Key architectural directions were solidified, and clear responsibilities were assigned for technical deliverables and stakeholder communication.",
+    "sentiment": "Highly Productive & Collaborative",
+    "topics_json": "[{\"topic\": \"Architecture & Cloud Infrastructure\", \"summary\": \"Host presented the technical topology. Attendee confirmed compliance with security protocols.\", \"decisions\": [\"Deploy stack with Docker Compose and PostgreSQL.\"]}, {\"topic\": \"Action Items & Timeline Alignment\", \"summary\": \"Reviewed immediate action points and deliverables for the upcoming sprint.\", \"decisions\": [\"Milestones locked for Phase 1 delivery.\"]}]",
+    "key_decisions_json": "[\"Approved deployment of the new AI-powered communication pipeline.\", \"Agreed to synchronize weekly progress reports every Friday at 10 AM.\", \"Confirmed use of open-source infrastructure for internal data sovereignty.\"]",
+    "unresolved_questions_json": "[\"Should we implement single sign-on (SSO) with Okta in the next release?\"]",
+    "transcript_json": "[{\"speaker\": \"Host (David)\", \"timestamp\": \"[00:00:01]\", \"text\": \"Hello everyone, thanks for jumping on. Let's go through the roadmap.\"}, {\"speaker\": \"Attendee (Zira)\", \"timestamp\": \"[00:00:06]\", \"text\": \"Sounds good! I've been reviewing the AI engine and audio capture design.\"}, {\"speaker\": \"Host (David)\", \"timestamp\": \"[00:00:12]\", \"text\": \"Great. I'll finalize the backend API docs and send them over by Friday.\"}, {\"speaker\": \"Attendee (Zira)\", \"timestamp\": \"[00:00:17]\", \"text\": \"Perfect, let me handle testing across both Meet and Teams.\"}]",
+    "raw_mom_json": "{\"meeting_title\": \"Product Strategy & AI Architecture Sync\", \"meeting_type\": \"Project Strategy & Status Sync\", \"date_time\": \"Today\", \"participants\": [\"Host\", \"Attendee\"], \"executive_summary\": \"During this session, Host and Attendee reviewed project milestones, timeline expectations, and integration priorities. Key architectural directions were solidified, and clear responsibilities were assigned for technical deliverables and stakeholder communication.\", \"key_decisions\": [\"Approved deployment of the new AI-powered communication pipeline.\", \"Agreed to synchronize weekly progress reports every Friday at 10 AM.\", \"Confirmed use of open-source infrastructure for internal data sovereignty.\"], \"agenda_topics\": [{\"topic\": \"Architecture & Cloud Infrastructure\", \"summary\": \"Host presented the technical topology. Attendee confirmed compliance with security protocols.\", \"decisions\": [\"Deploy stack with Docker Compose and PostgreSQL.\"]}, {\"topic\": \"Action Items & Timeline Alignment\", \"summary\": \"Reviewed immediate action points and deliverables for the upcoming sprint.\", \"decisions\": [\"Milestones locked for Phase 1 delivery.\"]}], \"action_items\": [{\"task\": \"Finalize backend API documentation and circulate with the team\", \"assignee_name\": \"Host\", \"assignee_email\": null, \"due_date\": \"End of Week\", \"priority\": \"High\", \"context_quote\": \"'Host: I will finalize the backend API docs and send them over by Friday.'\"}, {\"task\": \"Verify extension audio capture on Microsoft Teams and Google Meet\", \"assignee_name\": \"Attendee\", \"assignee_email\": null, \"due_date\": \"Next Monday\", \"priority\": \"Medium\", \"context_quote\": \"'Attendee: Let me handle testing across both Meet and Teams.'\"}], \"unresolved_questions\": [\"Should we implement single sign-on (SSO) with Okta in the next release?\"], \"overall_sentiment\": \"Highly Productive & Collaborative\", \"follow_up_email_subject\": \"Action Items & Minutes of Meeting: Google Meet (meet-sync-alpha)\", \"follow_up_email_body_html\": \"\\n<div style=\\\"font-family: Arial, sans-serif; color: #1e293b; line-height: 1.6;\\\">\\n  <h2 style=\\\"color: #0284c7;\\\">Minutes of Meeting: Google Meet (meet-sync-alpha)</h2>\\n  <p>Thank you for participating in today's discussion. Below is the executive summary and key action items agreed upon:</p>\\n  \\n  <h3 style=\\\"color: #0f172a; border-bottom: 2px solid #e2e8f0; padding-bottom: 4px;\\\">Executive Summary</h3>\\n  <p>The team reviewed upcoming development milestones, confirmed architecture directions, and assigned clear action ownership.</p>\\n  \\n  <h3 style=\\\"color: #0f172a; border-bottom: 2px solid #e2e8f0; padding-bottom: 4px;\\\">Key Action Items</h3>\\n  <table style=\\\"width: 100%; border-collapse: collapse; margin-top: 10px;\\\">\\n    <thead>\\n      <tr style=\\\"background: #f1f5f9; text-align: left;\\\">\\n        <th style=\\\"padding: 8px; border: 1px solid #cbd5e1;\\\">Task</th>\\n        <th style=\\\"padding: 8px; border: 1px solid #cbd5e1;\\\">Assignee</th>\\n        <th style=\\\"padding: 8px; border: 1px solid #cbd5e1;\\\">Deadline</th>\\n        <th style=\\\"padding: 8px; border: 1px solid #cbd5e1;\\\">Priority</th>\\n      </tr>\\n    </thead>\\n    <tbody>\\n      <tr>\\n        <td style=\\\"padding: 8px; border: 1px solid #cbd5e1;\\\">Finalize backend API documentation</td>\\n        <td style=\\\"padding: 8px; border: 1px solid #cbd5e1;\\\"><strong>Host</strong></td>\\n        <td style=\\\"padding: 8px; border: 1px solid #cbd5e1;\\\">End of Week</td>\\n        <td style=\\\"padding: 8px; border: 1px solid #cbd5e1;\\\"><span style=\\\"color: #dc2626;\\\">High</span></td>\\n      </tr>\\n      <tr>\\n        <td style=\\\"padding: 8px; border: 1px solid #cbd5e1;\\\">Verify extension audio capture</td>\\n        <td style=\\\"padding: 8px; border: 1px solid #cbd5e1;\\\"><strong>Attendee</strong></td>\\n        <td style=\\\"padding: 8px; border: 1px solid #cbd5e1;\\\">Next Monday</td>\\n        <td style=\\\"padding: 8px; border: 1px solid #cbd5e1;\\\"><span style=\\\"color: #0284c7;\\\">Medium</span></td>\\n      </tr>\\n    </tbody>\\n  </table>\\n  \\n  <p style=\\\"margin-top: 20px; font-size: 13px; color: #64748b;\\\">\\n    The complete Minutes of Meeting PDF is attached for your records.\\n  </p>\\n</div>\\n\", \"transcript\": [{\"speaker\": \"Host\", \"timestamp\": \"[00:00:05]\", \"text\": \"Hello everyone, thanks for jumping on. Let's go through the roadmap.\"}, {\"speaker\": \"Attendee\", \"timestamp\": \"[00:00:15]\", \"text\": \"Sounds good! I've been reviewing the AI engine and audio capture design.\"}, {\"speaker\": \"Host\", \"timestamp\": \"[00:00:30]\", \"text\": \"Great. I'll finalize the backend API docs and send them over by Friday.\"}, {\"speaker\": \"Attendee\", \"timestamp\": \"[00:00:45]\", \"text\": \"Perfect, let me handle testing across both Meet and Teams.\"}], \"speaker_talk_time\": [{\"speaker\": \"Host\", \"percentage\": 55, \"word_count\": 210}, {\"speaker\": \"Attendee\", \"percentage\": 45, \"word_count\": 175}], \"words_per_minute\": 142, \"questions_asked\": [\"Should we implement single sign-on (SSO) with Okta in the next release?\", \"What is the target deployment deadline for the extension?\"], \"key_metrics\": [\"Weekly progress reports every Friday at 10 AM\", \"Phase 1 delivery roadmap milestones\", \"100% test coverage target\"], \"sentiment_breakdown\": {\"positive\": 75, \"neutral\": 20, \"negative\": 5}}",
+    "created_at": "2026-10-09 11:44:39.581453"
+  }
+}

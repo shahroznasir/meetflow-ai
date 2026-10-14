@@ -18,6 +18,12 @@ from app.routers import meetings, telephony, actions, mcp, settings as settings_
 
 # Initialize database tables
 Base.metadata.create_all(bind=engine)
+try:
+    from app.db.seed import seed_demo_meeting_if_empty
+    seed_demo_meeting_if_empty()
+except Exception as e:
+    pass
+
 
 app = FastAPI(
     title="Gemini AI Meeting Minutes & Telephony Gateway",

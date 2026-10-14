@@ -31,14 +31,17 @@ def update_gemini_api_key(payload: APIKeyPayload):
     settings.GEMINI_API_KEY = key
     os.environ["GEMINI_API_KEY"] = key
 
-    # Write to .env file
-    env_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), ".env")
-    with open(env_path, "w", encoding="utf-8") as f:
-        f.write(f"GEMINI_API_KEY={key}\n")
-        f.write(f"GEMINI_MODEL={settings.GEMINI_MODEL}\n")
-        f.write(f"DATABASE_URL={settings.DATABASE_URL}\n")
-        f.write(f"SMTP_HOST={settings.SMTP_HOST}\n")
-        f.write(f"SMTP_PORT={settings.SMTP_PORT}\n")
+    # Write to .env file if filesystem is writable
+    try:
+        env_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), ".env")
+        with open(env_path, "w", encoding="utf-8") as f:
+            f.write(f"GEMINI_API_KEY={key}\n")
+            f.write(f"GEMINI_MODEL={settings.GEMINI_MODEL}\n")
+            f.write(f"DATABASE_URL={settings.DATABASE_URL}\n")
+            f.write(f"SMTP_HOST={settings.SMTP_HOST}\n")
+            f.write(f"SMTP_PORT={settings.SMTP_PORT}\n")
+    except Exception:
+        pass
 
     # Re-initialize Gemini client
     gemini_service.set_api_key(key)
