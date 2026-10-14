@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "MeetFlow AI — Meeting Intelligence & Notes",
+  "version": "1.0.0",
+  "description": "Autonomous meeting recorder, real-time Gemini transcription, structured MoM summaries & action item tracker for Google Meet and Microsoft Teams.",
+  "permissions": [
+    "tabCapture",
+    "activeTab",
+    "storage",
+    "offscreen",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://meet.google.com/*",
+    "https://teams.microsoft.com/*",
+    "https://teams.live.com/*",
+    "http://localhost:8000/*",
+    "http://127.0.0.1:8000/*"
+  ],
+  "background": {
+    "service_worker": "background/service_worker.js"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "MeetFlow AI Recorder"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://meet.google.com/*"],
+      "js": ["content_scripts/meet_observer.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://teams.microsoft.com/*", "https://teams.live.com/*"],
+      "js": ["content_scripts/teams_observer.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

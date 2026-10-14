@@ -1,0 +1,3052 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MeetFlow AI powered by Gemini Meeting Agent • Autonomous Minutes, Voice AI & Intelligence">
+  <title>MeetFlow AI — Gemini Meeting Agent & Voice Intelligence</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    /* Elegant light custom scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #f8fafc; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+    /* Ultra-sleek ambient aurora background */
+    .aurora-canvas {
+      background-color: #fbfbfe;
+      background-image: 
+        radial-gradient(circle at 50% -12%, rgba(139, 92, 246, 0.10) 0%, rgba(99, 102, 241, 0.05) 30%, transparent 65%),
+        radial-gradient(circle at 12% 28%, rgba(236, 72, 153, 0.03) 0%, transparent 40%),
+        radial-gradient(circle at 88% 35%, rgba(59, 130, 246, 0.04) 0%, transparent 45%);
+    }
+    .glass-header {
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .card-premium {
+      background: #ffffff;
+      border: 1px solid rgba(226, 232, 240, 0.85);
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.02), 0 6px 24px -4px rgba(124, 58, 237, 0.04);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .card-premium:hover {
+      border-color: rgba(167, 139, 250, 0.45);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 16px 36px -6px rgba(124, 58, 237, 0.08);
+      transform: translateY(-2px);
+    }
+    .hover-lift {
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hover-lift:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px -4px rgba(139, 92, 246, 0.09), 0 4px 10px -2px rgba(0, 0, 0, 0.03);
+    }
+
+    /* Ultra-sleek custom slider */
+    input[type=range].custom-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      background: #e2e8f0;
+      height: 6px;
+      border-radius: 9999px;
+      outline: none;
+      transition: background 0.15s ease;
+    }
+    input[type=range].custom-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #7c3aed;
+      border: 2px solid #ffffff;
+      box-shadow: 0 1px 4px rgba(124, 58, 237, 0.4);
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    input[type=range].custom-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.25);
+      box-shadow: 0 2px 8px rgba(124, 58, 237, 0.6);
+    }
+    input[type=range].custom-slider::-moz-range-thumb {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #7c3aed;
+      border: 2px solid #ffffff;
+      box-shadow: 0 1px 4px rgba(124, 58, 237, 0.4);
+      cursor: pointer;
+    }
+
+    /* Animated Soundwave Equalizer */
+    @keyframes soundwave {
+      0%, 100% { height: 4px; }
+      50% { height: 18px; }
+    }
+    .soundwave-bar {
+      width: 3px;
+      background: linear-gradient(to top, #7c3aed, #4f46e5);
+      border-radius: 9999px;
+      animation: soundwave 1s ease-in-out infinite;
+    }
+    .soundwave-bar:nth-child(1) { animation-delay: 0.1s; }
+    .soundwave-bar:nth-child(2) { animation-delay: 0.3s; }
+    .soundwave-bar:nth-child(3) { animation-delay: 0.15s; }
+    .soundwave-bar:nth-child(4) { animation-delay: 0.4s; }
+    .soundwave-bar:nth-child(5) { animation-delay: 0.25s; }
+
+    /* Modern subtle card styling */
+    .subtle-card-shadow {
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.02), 0 8px 24px -4px rgba(124, 58, 237, 0.04);
+    }
+  </style>
+</head>
+<body class="aurora-canvas text-slate-800 min-h-screen flex flex-col selection:bg-purple-100 selection:text-purple-900 antialiased">
+
+  <!-- ========================================================================= -->
+  <!-- TOP GLOBAL NAVBAR (World-Class SaaS Frosted Glass Header)                  -->
+  <!-- ========================================================================= -->
+  <nav class="border-b border-slate-200/75 glass-header sticky top-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[68px] flex items-center justify-between gap-4">
+      
+      <!-- Left: Logo & Brand -->
+      <div class="flex items-center gap-3 cursor-pointer select-none group shrink-0" onclick="switchMainView('landing')">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-violet-600 via-purple-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-violet-500/25 ring-1 ring-violet-400/30 group-hover:scale-105 transition-all duration-200 shrink-0">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L14.2 8.3L20.5 10.5L14.2 12.7L12 19L9.8 12.7L3.5 10.5L9.8 8.3L12 2Z" fill="currentColor"/>
+            <circle cx="19" cy="5" r="2" fill="currentColor" fill-opacity="0.8"/>
+          </svg>
+        </div>
+        <div class="flex items-center gap-2 whitespace-nowrap">
+          <span class="font-extrabold text-[19px] tracking-tight text-slate-900 leading-none">MeetFlow<span class="text-violet-600">.ai</span></span>
+          <span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-violet-50 text-violet-700 border border-violet-200/60 font-mono tracking-wider uppercase">AI</span>
+        </div>
+      </div>
+
+      <!-- Center: Clean, Non-wrapping Navigation Links -->
+      <div class="hidden lg:flex items-center gap-5 xl:gap-7 text-[13px] font-medium text-slate-600 whitespace-nowrap">
+        <a href="#features" onclick="if(currentMainView!=='landing') switchMainView('landing')" class="hover:text-violet-700 transition-colors whitespace-nowrap">Features</a>
+        <a href="#howitworks" onclick="if(currentMainView!=='landing') switchMainView('landing')" class="hover:text-violet-700 transition-colors whitespace-nowrap">How it Works</a>
+        <a href="#askaura-spotlight" onclick="if(currentMainView!=='landing') switchMainView('landing')" class="hover:text-violet-700 transition-colors flex items-center gap-1.5 whitespace-nowrap">
+          <i class="fa-solid fa-wand-magic-sparkles text-violet-600 text-xs"></i>
+          <span>Ask Aura</span>
+        </a>
+        <a href="#calculator" onclick="if(currentMainView!=='landing') switchMainView('landing')" class="hover:text-violet-700 transition-colors whitespace-nowrap">ROI Calculator</a>
+        <a href="#pricing" onclick="if(currentMainView!=='landing') switchMainView('landing')" class="hover:text-violet-700 transition-colors whitespace-nowrap">Comparison</a>
+        <a href="#faq" onclick="if(currentMainView!=='landing') switchMainView('landing')" class="hover:text-violet-700 transition-colors whitespace-nowrap">FAQ</a>
+        <a href="/docs" target="_blank" class="hover:text-violet-700 transition-colors text-slate-500 whitespace-nowrap">API</a>
+      </div>
+
+      <!-- Right: Compact, Elegant Actions (Strictly Non-wrapping) -->
+      <div class="flex items-center gap-2.5 shrink-0 whitespace-nowrap">
+        <!-- API Status Pill -->
+        <button onclick="openSettingsModal()" id="navKeyBtn" class="text-xs bg-white hover:bg-slate-50 text-slate-700 font-medium px-3 py-1.5 rounded-xl border border-slate-200/90 transition-all flex items-center gap-2 shadow-2xs hover:border-violet-300 whitespace-nowrap">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 ring-2 ring-emerald-100 shrink-0" id="navKeyDot"></span>
+          <span id="navKeyLabel" class="whitespace-nowrap">Gemini Active</span>
+        </button>
+
+        <!-- Upload Audio Ghost Button -->
+        <button onclick="document.getElementById('uploadModal').classList.remove('hidden')" class="hidden sm:inline-flex text-xs bg-white hover:bg-slate-50 text-slate-700 font-medium px-3 py-1.5 rounded-xl border border-slate-200/90 transition-all items-center gap-1.5 shadow-2xs hover:border-violet-300 whitespace-nowrap">
+          <i class="fa-solid fa-cloud-arrow-up text-violet-600 text-xs"></i>
+          <span class="whitespace-nowrap">Upload</span>
+        </button>
+
+        <!-- Chrome Extension Button -->
+        <button onclick="openExtensionModal()" class="hidden md:inline-flex text-xs bg-white hover:bg-slate-50 text-slate-700 font-medium px-3 py-1.5 rounded-xl border border-slate-200/90 transition-all items-center gap-1.5 shadow-2xs hover:border-violet-300 whitespace-nowrap">
+          <i class="fa-brands fa-chrome text-amber-500 text-xs"></i>
+          <span class="whitespace-nowrap">Extension</span>
+        </button>
+
+        <!-- Primary CTA: Switches to Notebook -->
+        <button onclick="switchMainView('notebook')" id="navNotebookCtaBtn" class="text-xs bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-semibold px-4 py-2 rounded-xl transition-all duration-200 flex items-center gap-2 shadow-md shadow-violet-500/20 hover:shadow-violet-500/35 ring-1 ring-white/20 transform hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap">
+          <i class="fa-solid fa-book-bookmark text-[11px]"></i>
+          <span id="navNotebookCtaLabel" class="whitespace-nowrap">Meeting Notebook</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- Notification Banner / Toast Container -->
+  <div id="toastContainer" class="fixed top-20 right-6 z-50 flex flex-col gap-2 max-w-sm pointer-events-none"></div>
+
+  <!-- ========================================================================= -->
+  <!-- VIEW 1: THE FIREFLIES.AI MARKETING WEBSITE & HERO LANDING PAGE            -->
+  <!-- ========================================================================= -->
+  <div id="landingView" class="w-full flex-1 flex flex-col aurora-canvas">
+
+    <!-- HERO SECTION -->
+    <section class="relative pt-16 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full text-center space-y-6">
+      
+      <!-- Top Pill Announcement -->
+      <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-violet-50/90 border border-violet-200/80 text-violet-900 text-xs font-semibold shadow-xs backdrop-blur-sm">
+        <span class="flex h-2 w-2 relative">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-violet-600"></span>
+        </span>
+        <span>MeetFlow AI 2.0 • Autonomous Meeting Intelligence</span>
+        <i class="fa-solid fa-arrow-right text-[10px] text-violet-600"></i>
+      </div>
+
+      <!-- Hero Headline -->
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 max-w-4xl mx-auto leading-[1.12]">
+        Automate your <br class="hidden sm:inline">
+        <span class="bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">meeting notes</span> with AI
+      </h1>
+
+      <!-- Hero Subheadline -->
+      <p class="text-sm sm:text-base lg:text-lg text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed">
+        Record, transcribe, summarize, and analyze all your conversations across <strong class="text-slate-900 font-semibold">Google Meet</strong>, <strong class="text-slate-900 font-semibold">Microsoft Teams</strong>, and <strong class="text-slate-900 font-semibold">Zoom</strong> with Google Gemini AI.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+        <button onclick="switchMainView('notebook')" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-bold text-sm shadow-lg shadow-violet-600/25 ring-1 ring-white/20 flex items-center gap-2.5 transition-all transform hover:-translate-y-0.5">
+          <i class="fa-solid fa-play text-xs"></i>
+          <span>Start for Free — Open Notebook</span>
+        </button>
+        <button onclick="document.getElementById('liveDemoSection').scrollIntoView({behavior: 'smooth'})" class="px-5 py-3.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 font-semibold text-sm border border-slate-200/90 shadow-xs flex items-center gap-2 transition-all hover:-translate-y-0.5">
+          <i class="fa-solid fa-wand-magic-sparkles text-violet-600"></i>
+          <span>Explore Live Meetings Demo</span>
+        </button>
+        <button onclick="document.getElementById('uploadModal').classList.remove('hidden')" class="px-5 py-3.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 font-medium text-sm border border-slate-200/90 shadow-xs flex items-center gap-2 transition-all hover:-translate-y-0.5">
+          <i class="fa-solid fa-cloud-arrow-up text-indigo-600"></i>
+          <span>Process Audio File</span>
+        </button>
+        <button onclick="openExtensionModal()" class="px-4 py-3.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 font-medium text-sm border border-slate-200/90 shadow-xs flex items-center gap-2 transition-all hover:-translate-y-0.5">
+          <i class="fa-brands fa-chrome text-amber-500"></i>
+          <span>Get Extension</span>
+        </button>
+      </div>
+
+      <!-- HERO MACOS INTERACTIVE PRODUCT MOCKUP (Fireflies Signature Showcase) -->
+      <div class="pt-6 max-w-5xl mx-auto text-left">
+        <div class="rounded-2xl border border-slate-200/90 bg-white/95 shadow-2xl shadow-violet-500/10 overflow-hidden backdrop-blur-xl">
+          
+          <!-- macOS Window Title Bar -->
+          <div class="px-4 py-3 bg-slate-50/90 border-b border-slate-200/80 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-[#ff5f56] inline-block shadow-xs"></span>
+              <span class="w-3 h-3 rounded-full bg-[#ffbd2e] inline-block shadow-xs"></span>
+              <span class="w-3 h-3 rounded-full bg-[#27c93f] inline-block shadow-xs"></span>
+              <span class="ml-3 text-xs font-semibold text-slate-700 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-violet-600 animate-pulse"></span>
+                <span>Product Strategy & AI Architecture Sync • AI Conversation Intelligence</span>
+              </span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-mono font-bold bg-violet-50 text-violet-700 border border-violet-200/60 px-2 py-0.5 rounded-full">01:45 / 03:20</span>
+              <button onclick="switchMainView('notebook')" class="text-[11px] font-semibold text-violet-700 hover:text-violet-900 px-2 py-0.5 rounded hover:bg-violet-50 transition">Open in Full Notebook &rarr;</button>
+            </div>
+          </div>
+
+          <!-- Mockup Inside: Audio player & Split Stage -->
+          <div class="p-5 sm:p-6 space-y-4 bg-gradient-to-b from-white to-slate-50/50">
+            
+            <!-- Simulated Soundwave Bar -->
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between gap-4">
+              <div class="flex items-center gap-3">
+                <button onclick="switchMainView('notebook')" class="w-8 h-8 rounded-lg bg-violet-600 text-white flex items-center justify-center shadow-xs">
+                  <i class="fa-solid fa-play text-xs ml-0.5"></i>
+                </button>
+                <div class="flex items-center gap-1 h-6">
+                  <span class="w-1 bg-violet-500 rounded-full h-4 animate-pulse"></span>
+                  <span class="w-1 bg-violet-400 rounded-full h-6 animate-pulse"></span>
+                  <span class="w-1 bg-violet-600 rounded-full h-3"></span>
+                  <span class="w-1 bg-violet-300 rounded-full h-5"></span>
+                  <span class="w-1 bg-violet-500 rounded-full h-2"></span>
+                  <span class="w-1 bg-violet-600 rounded-full h-6 animate-pulse"></span>
+                  <span class="w-1 bg-violet-400 rounded-full h-3"></span>
+                  <span class="w-1 bg-violet-500 rounded-full h-5"></span>
+                  <span class="w-1 bg-violet-300 rounded-full h-2"></span>
+                  <span class="w-1 bg-violet-600 rounded-full h-4"></span>
+                </div>
+                <span class="text-xs text-slate-500 font-mono">00:05 / 00:08</span>
+              </div>
+              <div class="flex items-center gap-2 text-xs">
+                <span class="px-2 py-0.5 rounded bg-white border border-slate-200 text-slate-600 font-mono font-medium">1.25x</span>
+                <span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 font-medium text-[11px]">Sub-second Sync</span>
+              </div>
+            </div>
+
+            <!-- Two Column: Transcript + Intelligence -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 text-xs">
+              
+              <!-- Left 7 cols: Verbatim Transcript -->
+              <div class="md:col-span-7 bg-white rounded-xl p-4 border border-slate-200/80 space-y-3 shadow-xs">
+                <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+                  <span class="font-bold text-slate-900 flex items-center gap-1.5"><i class="fa-solid fa-align-left text-violet-600"></i> Synchronized Transcript</span>
+                  <span class="text-[10px] text-slate-400">2 Speakers Diarized</span>
+                </div>
+                <div class="space-y-2">
+                  <div class="p-2.5 rounded-lg bg-violet-50/70 border border-violet-100/90">
+                    <div class="flex items-center justify-between mb-0.5">
+                      <span class="font-bold text-violet-900">Host</span>
+                      <span class="font-mono text-[10px] text-violet-600 font-medium">[00:00:05]</span>
+                    </div>
+                    <p class="text-slate-700">"Hello everyone, thanks for jumping on. Let's go through the roadmap."</p>
+                  </div>
+                  <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-100">
+                    <div class="flex items-center justify-between mb-0.5">
+                      <span class="font-bold text-slate-800">Attendee</span>
+                      <span class="font-mono text-[10px] text-slate-500 font-medium">[00:00:15]</span>
+                    </div>
+                    <p class="text-slate-700">"Sounds good! I've been reviewing the AI engine and audio capture design."</p>
+                  </div>
+                  <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-100">
+                    <div class="flex items-center justify-between mb-0.5">
+                      <span class="font-bold text-slate-800">Host</span>
+                      <span class="font-mono text-[10px] text-slate-500 font-medium">[00:00:30]</span>
+                    </div>
+                    <p class="text-slate-700">"Great. I'll finalize the backend API docs and send them over by Friday."</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right 5 cols: AI Super Summary & Intelligence -->
+              <div class="md:col-span-5 space-y-3">
+                <div class="bg-white rounded-xl p-4 border border-slate-200/80 space-y-2 shadow-xs">
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-slate-900 flex items-center gap-1.5"><i class="fa-solid fa-list-check text-indigo-600"></i> Action Items</span>
+                    <span class="text-[10px] bg-red-50 text-red-700 font-semibold px-1.5 py-0.5 rounded">1 High</span>
+                  </div>
+                  <div class="space-y-1.5">
+                    <div class="p-2 rounded-lg bg-slate-50 border border-slate-100">
+                      <p class="font-semibold text-slate-800 text-[11px]">Finalize backend API docs</p>
+                      <div class="flex items-center justify-between text-[10px] text-slate-500 mt-1">
+                        <span>Assignee: <strong>Host</strong></span>
+                        <span class="text-red-600 font-semibold">Friday</span>
+                      </div>
+                    </div>
+                    <div class="p-2 rounded-lg bg-slate-50 border border-slate-100">
+                      <p class="font-semibold text-slate-800 text-[11px]">Verify audio capture</p>
+                      <div class="flex items-center justify-between text-[10px] text-slate-500 mt-1">
+                        <span>Assignee: <strong>Attendee</strong></span>
+                        <span class="text-indigo-600 font-semibold">Monday</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-violet-600 to-indigo-600 rounded-xl p-3.5 text-white shadow-md shadow-violet-500/20 space-y-1.5">
+                  <div class="flex items-center gap-1.5 font-bold text-xs">
+                    <i class="fa-solid fa-wand-magic-sparkles text-violet-200"></i>
+                    <span>Ask Aura Co-Pilot</span>
+                  </div>
+                  <p class="text-[11px] text-violet-100 leading-snug">"Team confirmed roadmap milestones. Next progress sync scheduled for Friday at 10 AM."</p>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Trust Metrics -->
+      <div class="pt-6 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs text-slate-600 font-medium">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-shield-halved text-emerald-600 text-sm"></i>
+          <span>100% Self-Hosted & Private</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-microchip text-purple-600 text-sm"></i>
+          <span>Powered by Gemini 2.5 Flash</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-gauge-high text-indigo-600 text-sm"></i>
+          <span>Sub-second Speaker Diarization</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-circle-check text-amber-600 text-sm"></i>
+          <span>0$ Cloud Fees • Unlimited Audio</span>
+        </div>
+      </div>
+
+      <!-- INTEGRATIONS MARQUEE BAR -->
+      <div class="pt-10 max-w-4xl mx-auto" id="integrations">
+        <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-4">Works seamlessly with your meeting ecosystem</p>
+        <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs text-slate-700 font-medium">
+          <div class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white border border-slate-200/90 shadow-xs hover-lift">
+            <i class="fa-solid fa-video text-emerald-600 text-sm"></i> Google Meet
+          </div>
+          <div class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white border border-slate-200/90 shadow-xs hover-lift">
+            <i class="fa-brands fa-microsoft text-indigo-600 text-sm"></i> Microsoft Teams
+          </div>
+          <div class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white border border-slate-200/90 shadow-xs hover-lift">
+            <i class="fa-solid fa-phone-volume text-purple-600 text-sm"></i> Telephony & IVR
+          </div>
+          <div class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white border border-slate-200/90 shadow-xs hover-lift">
+            <i class="fa-brands fa-slack text-amber-600 text-sm"></i> Slack Alerts
+          </div>
+          <div class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white border border-slate-200/90 shadow-xs hover-lift">
+            <i class="fa-solid fa-file-pdf text-red-500 text-sm"></i> ReportLab PDF
+          </div>
+          <div class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white border border-slate-200/90 shadow-xs hover-lift">
+            <i class="fa-solid fa-envelope text-purple-600 text-sm"></i> Email Recap & ICS
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- CORE FEATURES SHOWCASE -->
+    <section id="features" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full space-y-12 border-t border-slate-200/80">
+      
+      <div class="text-center max-w-2xl mx-auto space-y-2">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-purple-700 flex items-center justify-center gap-2">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> Core Capabilities
+        </h2>
+        <h3 class="text-3xl font-extrabold text-slate-900 tracking-tight">Everything your team needs from every conversation</h3>
+        <p class="text-xs sm:text-sm text-slate-600">Capture voice from Chrome, conference rooms, or phone calls, and turn dialogue into structured outcomes.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Feature 1: Transcribe & Record -->
+        <div class="bg-white border border-slate-200/90 rounded-2xl p-6 space-y-4 subtle-card-shadow hover-lift flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-700 flex items-center justify-center text-xl border border-purple-200/60">
+              <i class="fa-solid fa-microphone-lines"></i>
+            </div>
+            <h4 class="text-base font-bold text-slate-900">Transcribe & Record</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Capture multi-speaker audio across browser tabs and telephony. Multi-turn diarization with clickable timestamps to instantly seek audio playback.
+            </p>
+          </div>
+          <div class="pt-2 border-t border-slate-100 text-[11px] text-purple-700 font-semibold flex items-center gap-1">
+            <span>Click-to-seek audio player</span> &rarr;
+          </div>
+        </div>
+
+        <!-- Feature 2: AI Super Summaries -->
+        <div class="bg-white border border-slate-200/90 rounded-2xl p-6 space-y-4 subtle-card-shadow hover-lift flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-700 flex items-center justify-center text-xl border border-indigo-200/60">
+              <i class="fa-solid fa-list-check"></i>
+            </div>
+            <h4 class="text-base font-bold text-slate-900">AI Super Summaries</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Instant 3-paragraph executive overview, key decisions log, and extracted action items paired with assignees, due dates, and verbatim spoken quotes.
+            </p>
+          </div>
+          <div class="pt-2 border-t border-slate-100 text-[11px] text-indigo-700 font-semibold flex items-center gap-1">
+            <span>Automated MoM generation</span> &rarr;
+          </div>
+        </div>
+
+        <!-- Feature 3: Ask Aura AI -->
+        <div id="askaura" class="bg-white border border-slate-200/90 rounded-2xl p-6 space-y-4 subtle-card-shadow hover-lift flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-xl bg-pink-50 text-pink-700 flex items-center justify-center text-xl border border-pink-200/60">
+              <i class="fa-solid fa-robot"></i>
+            </div>
+            <h4 class="text-base font-bold text-slate-900">Ask Aura AI Co-Pilot</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Chat directly with any meeting. Ask Aura to draft follow-up emails, verify what was decided about budgets, or surface unanswered questions with dynamic chips.
+            </p>
+          </div>
+          <div class="pt-2 border-t border-slate-100 text-[11px] text-pink-700 font-semibold flex items-center gap-1">
+            <span>Conversational Meeting LLM</span> &rarr;
+          </div>
+        </div>
+
+        <!-- Feature 4: Conversation Intelligence -->
+        <div id="intelligence" class="bg-white border border-slate-200/90 rounded-2xl p-6 space-y-4 subtle-card-shadow hover-lift flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-xl bg-sky-50 text-sky-700 flex items-center justify-center text-xl border border-sky-200/60">
+              <i class="fa-solid fa-chart-pie"></i>
+            </div>
+            <h4 class="text-base font-bold text-slate-900">Conversation Intelligence</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Speaker talk-time ratios, speaking pace (Words Per Minute gauge), sentiment distribution, questions tracker, and critical metrics isolation.
+            </p>
+          </div>
+          <div class="pt-2 border-t border-slate-100 text-[11px] text-sky-700 font-semibold flex items-center gap-1">
+            <span>Rich speaker analytics</span> &rarr;
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- SECTION: HOW IT WORKS IN 3 STEPS (Signature Fireflies Workflow)           -->
+    <!-- ========================================================================= -->
+    <section id="howitworks" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full space-y-12 border-t border-slate-200/80">
+      <div class="text-center max-w-3xl mx-auto space-y-3">
+        <span class="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-violet-700 bg-violet-50 px-3.5 py-1 rounded-full border border-violet-200/80 shadow-2xs">
+          <i class="fa-solid fa-bolt text-violet-600"></i> Seamless 3-Step Workflow
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">Automate meeting intelligence in 3 effortless steps</h2>
+        <p class="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal">
+          From the second your conversation starts to automated post-meeting execution, MeetFlow turns raw voice into structured outcomes with zero manual note-taking.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+        
+        <!-- Step 1 Card -->
+        <div class="bg-white border border-slate-200/90 rounded-2xl p-7 space-y-5 subtle-card-shadow hover-lift flex flex-col justify-between relative overflow-hidden group">
+          <div class="absolute -top-10 -right-10 w-28 h-28 bg-violet-100/40 rounded-full blur-2xl group-hover:bg-violet-200/60 transition-all"></div>
+          <div class="space-y-4 relative">
+            <div class="flex items-center justify-between">
+              <span class="text-3xl font-black font-mono text-violet-600/30 group-hover:text-violet-600 transition-colors">01</span>
+              <span class="text-[10px] font-bold font-mono px-2 py-0.5 rounded-full bg-violet-50 text-violet-700 border border-violet-200/60 uppercase">Capture</span>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-violet-50 border border-violet-200/80 text-violet-700 flex items-center justify-center text-xl shadow-2xs">
+              <i class="fa-solid fa-microphone-lines"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 tracking-tight">Auto-Join or Upload Audio</h3>
+            <p class="text-xs text-slate-600 leading-relaxed font-normal">
+              Capture system & microphone audio with our Chrome extension across Google Meet, Microsoft Teams, and Zoom. Or upload existing .mp3, .wav, or .webm recordings directly.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-[10px] font-semibold text-slate-600">
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2 py-0.5 rounded-md bg-slate-50 border border-slate-200"><i class="fa-solid fa-check text-emerald-600 mr-1"></i>Browser Tabs</span>
+              <span class="px-2 py-0.5 rounded-md bg-slate-50 border border-slate-200"><i class="fa-solid fa-check text-emerald-600 mr-1"></i>Audio Files</span>
+            </div>
+            <button onclick="openExtensionModal()" class="text-violet-700 hover:text-violet-900 font-bold hover:underline inline-flex items-center gap-1">
+              <i class="fa-brands fa-chrome text-amber-500"></i> Extension &rarr;
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 2 Card -->
+        <div class="bg-white border border-slate-200/90 rounded-2xl p-7 space-y-5 subtle-card-shadow hover-lift flex flex-col justify-between relative overflow-hidden group">
+          <div class="absolute -top-10 -right-10 w-28 h-28 bg-purple-100/40 rounded-full blur-2xl group-hover:bg-purple-200/60 transition-all"></div>
+          <div class="space-y-4 relative">
+            <div class="flex items-center justify-between">
+              <span class="text-3xl font-black font-mono text-purple-600/30 group-hover:text-purple-600 transition-colors">02</span>
+              <span class="text-[10px] font-bold font-mono px-2 py-0.5 rounded-full bg-purple-50 text-purple-700 border border-purple-200/60 uppercase">Transcribe</span>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-purple-50 border border-purple-200/80 text-purple-700 flex items-center justify-center text-xl shadow-2xs">
+              <svg class="w-6 h-6 text-purple-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 10v4"/>
+                <path d="M7 6v12"/>
+                <path d="M11 3v18"/>
+                <path d="M15 7v10"/>
+                <path d="M19 11v2"/>
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 tracking-tight">Diarize with Click-to-Seek</h3>
+            <p class="text-xs text-slate-600 leading-relaxed font-normal">
+              State-of-the-art voice processing separates speakers into labeled turns (Host, Attendee). Every timestamp is click-to-seek, synchronizing audio playback instantly.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-100 flex flex-wrap gap-1.5 text-[10px] font-semibold text-slate-600">
+            <span class="px-2 py-0.5 rounded-md bg-slate-50 border border-slate-200"><i class="fa-solid fa-check text-emerald-600 mr-1"></i>Multi-Speaker</span>
+            <span class="px-2 py-0.5 rounded-md bg-slate-50 border border-slate-200"><i class="fa-solid fa-check text-emerald-600 mr-1"></i>Sub-Second Sync</span>
+          </div>
+        </div>
+
+        <!-- Step 3 Card -->
+        <div class="bg-white border border-slate-200/90 rounded-2xl p-7 space-y-5 subtle-card-shadow hover-lift flex flex-col justify-between relative overflow-hidden group">
+          <div class="absolute -top-10 -right-10 w-28 h-28 bg-indigo-100/40 rounded-full blur-2xl group-hover:bg-indigo-200/60 transition-all"></div>
+          <div class="space-y-4 relative">
+            <div class="flex items-center justify-between">
+              <span class="text-3xl font-black font-mono text-indigo-600/30 group-hover:text-indigo-600 transition-colors">03</span>
+              <span class="text-[10px] font-bold font-mono px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200/60 uppercase">Intelligence</span>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-indigo-50 border border-indigo-200/80 text-indigo-700 flex items-center justify-center text-xl shadow-2xs">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 tracking-tight">Synthesize MoM & Ask Aura</h3>
+            <p class="text-xs text-slate-600 leading-relaxed font-normal">
+              Google Gemini 2.5 Flash extracts executive summaries, assigns accountable action items with due dates, analyzes sentiment, and answers any question via Ask Aura AI.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-100 flex flex-wrap gap-1.5 text-[10px] font-semibold text-slate-600">
+            <span class="px-2 py-0.5 rounded-md bg-slate-50 border border-slate-200"><i class="fa-solid fa-check text-emerald-600 mr-1"></i>PDF MoM</span>
+            <span class="px-2 py-0.5 rounded-md bg-slate-50 border border-slate-200"><i class="fa-solid fa-check text-emerald-600 mr-1"></i>Email Dispatch</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- SECTION: ASK AURA AI FEATURE SPOTLIGHT (Fireflies AskFred Counterpart)     -->
+    <!-- ========================================================================= -->
+    <section id="askaura-spotlight" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full space-y-12 border-t border-slate-200/80">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        
+        <!-- Left Column: Copy & Interactive Prompts -->
+        <div class="lg:col-span-5 space-y-6 text-left">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-pink-50 border border-pink-200/80 text-pink-700 text-xs font-semibold shadow-2xs">
+            <i class="fa-solid fa-wand-magic-sparkles text-xs"></i>
+            <span>Conversational Intelligence Co-Pilot</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+            Talk with your meetings like a teammate
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+            Never dig through hours of call recordings again. Ask Aura searches verbatim audio, pinpoints spoken decisions, drafts follow-up emails, and surfaces unresolved questions in seconds.
+          </p>
+
+          <div class="space-y-3 pt-2">
+            <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Click a prompt to test live:</p>
+            <div class="flex flex-col gap-2">
+              <button onclick="demoSpotlightAura('email')" id="spotlightBtn-email" class="spotlight-prompt-btn p-3 rounded-xl border border-violet-200 bg-violet-50/70 text-violet-900 text-xs font-semibold flex items-center justify-between text-left transition hover:bg-violet-100/70 shadow-2xs">
+                <span class="flex items-center gap-2">
+                  <i class="fa-solid fa-envelope text-violet-600"></i>
+                  <span>Draft a concise follow-up email recap</span>
+                </span>
+                <i class="fa-solid fa-arrow-right text-[10px] text-violet-600"></i>
+              </button>
+              <button onclick="demoSpotlightAura('actions')" id="spotlightBtn-actions" class="spotlight-prompt-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 text-xs font-medium flex items-center justify-between text-left transition hover:bg-slate-50 shadow-2xs">
+                <span class="flex items-center gap-2">
+                  <i class="fa-solid fa-list-check text-indigo-600"></i>
+                  <span>What are the deliverables & accountable owners?</span>
+                </span>
+                <i class="fa-solid fa-arrow-right text-[10px] text-slate-400"></i>
+              </button>
+              <button onclick="demoSpotlightAura('unresolved')" id="spotlightBtn-unresolved" class="spotlight-prompt-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 text-xs font-medium flex items-center justify-between text-left transition hover:bg-slate-50 shadow-2xs">
+                <span class="flex items-center gap-2">
+                  <i class="fa-solid fa-circle-question text-pink-600"></i>
+                  <span>What questions were left open or unresolved?</span>
+                </span>
+                <i class="fa-solid fa-arrow-right text-[10px] text-slate-400"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Simulated Live Chat Showcase -->
+        <div class="lg:col-span-7">
+          <div class="rounded-2xl border border-slate-200/90 bg-white shadow-2xl shadow-violet-500/10 overflow-hidden">
+            <!-- Window header -->
+            <div class="px-5 py-3.5 bg-slate-50/90 border-b border-slate-200/80 flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-violet-600 to-indigo-600 text-white flex items-center justify-center text-sm shadow-xs">
+                  <i class="fa-solid fa-wand-magic-sparkles text-xs"></i>
+                </div>
+                <div>
+                  <h4 class="text-xs font-bold text-slate-900 flex items-center gap-1.5">
+                    Ask Aura Co-Pilot
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                  </h4>
+                  <p class="text-[10px] text-slate-500 font-medium">Grounded in: Product Strategy & AI Architecture Sync</p>
+                </div>
+              </div>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-violet-50 text-violet-700 border border-violet-200 font-semibold">Gemini 2.5 Flash</span>
+            </div>
+
+            <!-- Chat dialogue simulation -->
+            <div class="p-6 space-y-4 min-h-[320px] bg-gradient-to-b from-white to-slate-50/40 text-xs">
+              
+              <!-- User Question -->
+              <div class="flex items-start justify-end gap-2.5">
+                <div id="spotlightUserText" class="bg-gradient-to-r from-violet-600 to-indigo-600 text-white p-3.5 rounded-2xl rounded-tr-xs max-w-md shadow-xs leading-relaxed">
+                  Draft a concise follow-up email recap for attendees.
+                </div>
+                <div class="w-7 h-7 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center text-xs shrink-0 font-bold">
+                  U
+                </div>
+              </div>
+
+              <!-- Aura Response -->
+              <div class="flex items-start gap-2.5">
+                <div class="w-7 h-7 rounded-xl bg-gradient-to-tr from-violet-600 to-indigo-600 text-white flex items-center justify-center text-xs shrink-0 shadow-xs">
+                  <i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i>
+                </div>
+                <div id="spotlightAuraResponse" class="bg-white border border-slate-200/90 p-4 rounded-2xl rounded-tl-xs max-w-lg shadow-xs space-y-2 text-slate-700 leading-relaxed">
+                  <p class="font-bold text-violet-900">Subject: Recap & Next Steps: Product Strategy Sync</p>
+                  <p>Hi team, thanks for joining today's roadmap review. Here is a summary of our decisions:</p>
+                  <ul class="list-disc pl-4 space-y-1 my-1 text-slate-600">
+                    <li><strong>Roadmap Confirmed:</strong> AI engine architecture validated <span class="text-[10px] bg-violet-50 text-violet-700 font-mono px-1 rounded border border-violet-200">[00:00:06]</span>.</li>
+                    <li><strong>Backend Docs:</strong> API documentation will be shared by Friday <span class="text-[10px] bg-violet-50 text-violet-700 font-mono px-1 rounded border border-violet-200">[00:00:12]</span>.</li>
+                    <li><strong>Audio Testing:</strong> Zira validating Meet and Teams capture pipeline <span class="text-[10px] bg-violet-50 text-violet-700 font-mono px-1 rounded border border-violet-200">[00:00:17]</span>.</li>
+                  </ul>
+                  <p class="text-[11px] text-slate-500 italic pt-1">Next progress checkpoint: Friday at 10:00 AM.</p>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="p-3 bg-slate-50/90 border-t border-slate-200/80 flex items-center justify-between text-xs">
+              <span class="text-[11px] text-slate-500 font-medium"><i class="fa-solid fa-shield-halved text-emerald-600 mr-1"></i> 100% private & grounded in spoken dialogue</span>
+              <button onclick="switchMainView('notebook')" class="text-violet-700 hover:text-violet-900 font-bold text-xs flex items-center gap-1">
+                Open in Full Notebook <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- LIVE INTERACTIVE WORKBENCH PREVIEW ON LANDING PAGE -->
+    <section id="liveDemoSection" class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full space-y-6">
+      
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-slate-200/80">
+        <div>
+          <span class="text-[10px] bg-purple-100 text-purple-800 border border-purple-200 px-2 py-0.5 rounded font-mono font-semibold uppercase">Interactive Sandbox</span>
+          <h3 class="text-2xl font-extrabold text-slate-900 mt-1 tracking-tight">Live Meeting Notebook Preview</h3>
+          <p class="text-xs text-slate-500">Experience the interactive audio player, AI meeting co-pilot, and conversation intelligence tabs below.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="switchMainView('notebook')" class="text-xs bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold px-4 py-2 rounded-xl transition flex items-center gap-2 shadow-md shadow-purple-500/20">
+            <i class="fa-solid fa-up-right-and-down-left-from-center text-[10px]"></i>
+            <span>Fullscreen Notebook Workspace</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Meeting Container (Crisp White Card with Soft Elevation) -->
+      <div class="bg-white border border-slate-200/90 rounded-2xl p-6 subtle-card-shadow space-y-6">
+        
+        <!-- Live Workspace Header -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 gap-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span id="previewSourceBadge" class="text-[10px] px-2.5 py-0.5 rounded-full font-semibold bg-purple-50 text-purple-700 border border-purple-200">WEB EXTENSION</span>
+              <span id="previewSentimentBadge" class="text-[10px] px-2.5 py-0.5 rounded-full font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">Productive</span>
+            </div>
+            <h2 id="previewTitle" class="text-xl font-bold text-slate-900 mt-1.5">Select a meeting from the notebook</h2>
+            <p id="previewMeta" class="text-xs text-slate-500 mt-0.5 font-medium"></p>
+          </div>
+          
+          <div class="flex flex-wrap items-center gap-2">
+            <button id="previewReprocessBtn" onclick="reprocessCurrentMeeting()" class="text-xs bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold px-3 py-2 rounded-xl transition flex items-center gap-1.5 border border-indigo-200">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Re-process with Gemini
+            </button>
+            <a id="previewPdfBtn" href="#" target="_blank" class="text-xs bg-slate-50 hover:bg-slate-100 text-slate-700 font-semibold px-3 py-2 rounded-xl transition flex items-center gap-1.5 border border-slate-200">
+              <i class="fa-solid fa-file-pdf text-red-500"></i> PDF MoM
+            </a>
+            <button id="previewEmailBtn" onclick="resendCurrentEmail()" class="text-xs bg-purple-50 hover:bg-purple-100 text-purple-700 font-semibold px-3 py-2 rounded-xl transition flex items-center gap-1.5 border border-purple-200">
+              <i class="fa-solid fa-paper-plane"></i> Send Email
+            </button>
+          </div>
+        </div>
+
+        <!-- Audio Player Bar (Light Modern Scrubber) -->
+        <div id="audioPlayerContainer" class="hidden bg-slate-50/80 border border-slate-200/90 rounded-2xl p-4 space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-purple-100 text-purple-700">
+                <svg class="w-4 h-4 text-purple-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 10v4"/>
+                  <path d="M7 6v12"/>
+                  <path d="M11 3v18"/>
+                  <path d="M15 7v10"/>
+                  <path d="M19 11v2"/>
+                </svg>
+              </span>
+              <div>
+                <p class="text-xs font-semibold text-slate-900">Interactive Audio Track & Click-to-Seek</p>
+                <p class="text-[10px] text-slate-500">Click any transcript turn or timestamp below to jump audio playback instantly</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <a id="audioDownloadLink" href="#" download class="text-xs text-slate-600 hover:text-slate-900 px-2.5 py-1 rounded-lg bg-white hover:bg-slate-100 border border-slate-200 transition flex items-center gap-1.5 shadow-2xs">
+                <i class="fa-solid fa-download text-purple-600"></i> Download Audio
+              </a>
+            </div>
+          </div>
+
+          <!-- Custom Player Controls -->
+          <div class="bg-white border border-slate-200/90 rounded-xl p-3 flex flex-wrap items-center justify-between gap-3 shadow-xs">
+            <div class="flex items-center gap-2">
+              <button onclick="skipAudio(-5)" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition text-xs shadow-2xs hover-lift" title="Rewind 5s">
+                <i class="fa-solid fa-rotate-left"></i>
+                <span class="text-[9px] font-bold ml-0.5">5</span>
+              </button>
+              <button onclick="toggleAudioPlayback()" class="w-10 h-10 rounded-xl bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white flex items-center justify-center transition shadow-md shadow-violet-500/25 ring-1 ring-white/20 hover-lift">
+                <i id="playerPlayPauseIcon" class="fa-solid fa-play text-sm ml-0.5"></i>
+              </button>
+              <button onclick="skipAudio(5)" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition text-xs shadow-2xs hover-lift" title="Forward 5s">
+                <span class="text-[9px] font-bold mr-0.5">5</span>
+                <i class="fa-solid fa-rotate-right"></i>
+              </button>
+              <!-- Live Equalizer Soundwave Indicator -->
+              <div id="playerSoundwave" class="hidden items-end gap-0.5 h-4 px-1.5">
+                <span class="soundwave-bar h-2"></span>
+                <span class="soundwave-bar h-4"></span>
+                <span class="soundwave-bar h-3"></span>
+                <span class="soundwave-bar h-5"></span>
+                <span class="soundwave-bar h-2"></span>
+              </div>
+            </div>
+
+            <div class="flex-1 min-w-[200px] flex items-center gap-3">
+              <span id="playerCurrentTime" class="text-[11px] font-mono font-medium text-slate-600 bg-slate-50 px-2 py-0.5 rounded border border-slate-200/60">00:00</span>
+              <div class="flex-1 relative flex items-center">
+                <input type="range" id="playerProgressBar" min="0" max="100" value="0" step="0.1" oninput="handlePlayerSeek(this.value)" class="w-full custom-slider cursor-pointer">
+              </div>
+              <span id="playerTotalDuration" class="text-[11px] font-mono font-medium text-slate-600 bg-slate-50 px-2 py-0.5 rounded border border-slate-200/60">00:00</span>
+            </div>
+
+            <div class="flex items-center gap-1 bg-slate-100/90 p-1 rounded-xl border border-slate-200/80">
+              <button onclick="setPlaybackSpeed(0.75)" class="speed-btn px-2 py-0.5 rounded-lg text-[10px] font-medium text-slate-600 hover:text-slate-900 transition" data-speed="0.75">0.75x</button>
+              <button onclick="setPlaybackSpeed(1)" class="speed-btn px-2 py-0.5 rounded-lg text-[10px] font-bold text-violet-700 bg-white shadow-2xs transition" data-speed="1">1x</button>
+              <button onclick="setPlaybackSpeed(1.25)" class="speed-btn px-2 py-0.5 rounded-lg text-[10px] font-medium text-slate-600 hover:text-slate-900 transition" data-speed="1.25">1.25x</button>
+              <button onclick="setPlaybackSpeed(1.5)" class="speed-btn px-2 py-0.5 rounded-lg text-[10px] font-medium text-slate-600 hover:text-slate-900 transition" data-speed="1.5">1.5x</button>
+              <button onclick="setPlaybackSpeed(2)" class="speed-btn px-2 py-0.5 rounded-lg text-[10px] font-medium text-slate-600 hover:text-slate-900 transition" data-speed="2">2x</button>
+            </div>
+          </div>
+          <audio id="meetingAudioElement" class="hidden"></audio>
+        </div>
+
+        <!-- Modern Segmented Pill Tabs Navigation -->
+        <div class="p-1.5 rounded-2xl bg-slate-100/90 border border-slate-200/80 inline-flex items-center gap-1.5 overflow-x-auto shadow-inner max-w-full">
+          <button onclick="switchMeetingTab('summary')" id="tabBtn-summary" class="meeting-tab-btn px-4 py-2 text-xs font-semibold rounded-xl transition-all duration-200 flex items-center gap-2 bg-white text-violet-700 shadow-xs border border-violet-100/60">
+            <i class="fa-solid fa-file-lines text-violet-600"></i>
+            <span>Summary</span>
+          </button>
+          <button onclick="switchMeetingTab('actions')" id="tabBtn-actions" class="meeting-tab-btn px-4 py-2 text-xs font-medium rounded-xl transition-all duration-200 flex items-center gap-2 text-slate-600 hover:text-slate-900 hover:bg-white/60 border border-transparent">
+            <i class="fa-solid fa-list-check"></i>
+            <span>Action Items</span>
+            <span id="tabBadgeActionsCount" class="text-[10px] bg-slate-200/80 text-slate-700 px-1.5 py-0.2 rounded-full font-mono font-medium">0</span>
+          </button>
+          <button onclick="switchMeetingTab('intelligence')" id="tabBtn-intelligence" class="meeting-tab-btn px-4 py-2 text-xs font-medium rounded-xl transition-all duration-200 flex items-center gap-2 text-slate-600 hover:text-slate-900 hover:bg-white/60 border border-transparent">
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Conversation Intelligence</span>
+            <span class="text-[9px] bg-violet-100 text-violet-700 px-1.5 py-0.5 rounded-full font-semibold">AI Analytics</span>
+          </button>
+          <button onclick="switchMeetingTab('askfred')" id="tabBtn-askfred" class="meeting-tab-btn px-4 py-2 text-xs font-medium rounded-xl transition-all duration-200 flex items-center gap-2 text-slate-600 hover:text-slate-900 hover:bg-white/60 border border-transparent">
+            <i class="fa-solid fa-wand-magic-sparkles text-violet-600"></i>
+            <span>Ask Aura AI</span>
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
+            </span>
+          </button>
+        </div>
+
+        <!-- TAB 1: SUMMARY -->
+        <div id="tabPane-summary" class="tab-pane space-y-6">
+          <div>
+            <h3 class="text-xs font-bold uppercase tracking-wider text-purple-700 mb-2">Executive Summary</h3>
+            <p id="detailExecutiveSummary" class="text-xs text-slate-700 leading-relaxed bg-slate-50/80 p-4 rounded-xl border border-slate-200/80 font-normal"></p>
+          </div>
+          <div id="decisionsContainer">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-purple-700 mb-2">Key Decisions Made</h3>
+            <ul id="detailDecisionsList" class="space-y-1.5 text-xs text-slate-700 pl-4 list-disc bg-slate-50/50 p-3 rounded-xl border border-slate-200/60"></ul>
+          </div>
+          <div>
+            <h3 class="text-xs font-bold uppercase tracking-wider text-purple-700 mb-2">Agenda Topics & Notes</h3>
+            <div id="detailTopicsList" class="space-y-3"></div>
+          </div>
+        </div>
+
+        <!-- TAB 2: ACTIONS -->
+        <div id="tabPane-actions" class="tab-pane hidden space-y-4">
+          <div class="overflow-x-auto border border-slate-200 rounded-xl bg-white shadow-2xs">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-50 text-slate-600 uppercase font-bold border-b border-slate-200">
+                <tr>
+                  <th class="px-4 py-3">Task</th>
+                  <th class="px-4 py-3">Assignee</th>
+                  <th class="px-4 py-3">Deadline</th>
+                  <th class="px-4 py-3">Priority</th>
+                  <th class="px-4 py-3 text-right">Status</th>
+                </tr>
+              </thead>
+              <tbody id="detailActionsTable" class="divide-y divide-slate-100 bg-white"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB 3: CONVERSATION INTELLIGENCE -->
+        <div id="tabPane-intelligence" class="tab-pane hidden space-y-6">
+          <!-- Talk Time Distribution -->
+          <div class="bg-slate-50/80 border border-slate-200/90 rounded-2xl p-5 space-y-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-purple-700 flex items-center gap-2">
+                  <i class="fa-solid fa-users"></i> Speaker Talk-Time Ratio
+                </h4>
+                <p class="text-[11px] text-slate-500 mt-0.5">Proportion of meeting time occupied by each participant</p>
+              </div>
+              <span id="intelTotalDurationBadge" class="text-xs font-mono font-medium bg-white text-slate-700 px-2.5 py-1 rounded-lg border border-slate-200 shadow-2xs">0s total</span>
+            </div>
+            <div id="talkTimeProgressBar" class="w-full h-3.5 bg-slate-200 rounded-full overflow-hidden flex shadow-inner"></div>
+            <div id="talkTimeSpeakersGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 pt-1"></div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Speaking Pace -->
+            <div class="bg-white border border-slate-200/90 rounded-2xl p-5 space-y-3 shadow-xs">
+              <div class="flex items-center justify-between">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-purple-700 flex items-center gap-2">
+                  <i class="fa-solid fa-gauge-high"></i> Speaking Pace (WPM)
+                </h4>
+                <span id="wpmPaceBadge" class="text-[10px] px-2 py-0.5 rounded-full font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">Conversational</span>
+              </div>
+              <div class="flex items-baseline gap-2">
+                <span id="wpmValue" class="text-3xl font-extrabold text-slate-900">130</span>
+                <span class="text-xs text-slate-500">words per minute</span>
+              </div>
+              <p class="text-[11px] text-slate-500 leading-relaxed">
+                Average pace. Optimal business conversation cadence is between 120 and 150 WPM.
+              </p>
+            </div>
+
+            <!-- Sentiment Breakdown -->
+            <div class="bg-white border border-slate-200/90 rounded-2xl p-5 space-y-3 shadow-xs">
+              <div class="flex items-center justify-between">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-purple-700 flex items-center gap-2">
+                  <i class="fa-solid fa-heart-pulse"></i> Sentiment Analysis
+                </h4>
+                <span id="intelSentimentLabel" class="text-[10px] px-2 py-0.5 rounded-full font-bold bg-purple-50 text-purple-700 border border-purple-200">Productive</span>
+              </div>
+              <div class="space-y-2">
+                <div class="flex items-center justify-between text-xs">
+                  <span class="text-emerald-700 font-medium flex items-center gap-1.5"><i class="fa-solid fa-circle text-[8px] text-emerald-500"></i> Positive / Collaborative</span>
+                  <span id="sentimentPosVal" class="font-bold text-slate-900">70%</span>
+                </div>
+                <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div id="sentimentPosBar" class="h-full bg-emerald-500 rounded-full transition-all duration-500" style="width: 70%"></div>
+                </div>
+                <div class="flex items-center justify-between text-xs pt-1">
+                  <span class="text-slate-600 font-medium flex items-center gap-1.5"><i class="fa-solid fa-circle text-[8px] text-slate-400"></i> Neutral / Informational</span>
+                  <span id="sentimentNeuVal" class="font-bold text-slate-900">25%</span>
+                </div>
+                <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div id="sentimentNeuBar" class="h-full bg-slate-400 rounded-full transition-all duration-500" style="width: 25%"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Questions Tracked -->
+            <div class="bg-white border border-slate-200/90 rounded-2xl p-5 space-y-3 shadow-xs">
+              <div class="flex items-center justify-between">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-purple-700 flex items-center gap-2">
+                  <i class="fa-solid fa-circle-question"></i> Questions Tracked
+                </h4>
+                <span id="questionsCountBadge" class="text-[10px] px-2 py-0.5 rounded-full font-mono font-bold bg-indigo-50 text-indigo-700 border border-indigo-200">0</span>
+              </div>
+              <div id="questionsAskedList" class="space-y-2 max-h-48 overflow-y-auto pr-1 text-xs text-slate-700"></div>
+            </div>
+
+            <!-- Key Metrics -->
+            <div class="bg-white border border-slate-200/90 rounded-2xl p-5 space-y-3 shadow-xs">
+              <div class="flex items-center justify-between">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-purple-700 flex items-center gap-2">
+                  <i class="fa-solid fa-hashtag"></i> Key Metrics & Numbers
+                </h4>
+                <span id="metricsCountBadge" class="text-[10px] px-2 py-0.5 rounded-full font-mono font-bold bg-amber-50 text-amber-700 border border-amber-200">0</span>
+              </div>
+              <div id="keyMetricsList" class="space-y-2 max-h-48 overflow-y-auto pr-1 text-xs text-slate-700"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 4: ASK AURA -->
+        <div id="tabPane-askfred" class="tab-pane hidden space-y-4">
+          <div class="bg-gradient-to-r from-purple-50 via-indigo-50/50 to-white border border-purple-200/80 rounded-2xl p-4 flex items-center justify-between shadow-2xs">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-purple-500/20 text-lg">
+                <i class="fa-solid fa-robot"></i>
+              </div>
+              <div>
+                <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                  Ask Aura AI Meeting Co-Pilot
+                  <span class="text-[9px] bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full font-semibold">Grounded in Meeting Audio & Notes</span>
+                </h3>
+                <p class="text-xs text-slate-500 mt-0.5">Ask questions, request email drafts, search agreements, or clarify discussion points.</p>
+              </div>
+            </div>
+            <button onclick="clearFredChatHistory()" class="text-xs text-slate-600 hover:text-slate-900 px-2.5 py-1 rounded-lg bg-white hover:bg-slate-100 border border-slate-200 transition flex items-center gap-1.5 shadow-2xs">
+              <i class="fa-solid fa-arrows-rotate"></i> Reset Chat
+            </button>
+          </div>
+
+          <!-- Quick Preset Prompt Chips -->
+          <div class="flex items-center gap-2 overflow-x-auto pb-1 text-xs">
+            <span class="text-[11px] text-slate-500 font-semibold shrink-0"><i class="fa-solid fa-bolt text-amber-500 mr-1"></i> Quick questions:</span>
+            <button onclick="sendFredPrompt('What are the key takeaways from this meeting?')" class="chip-preset bg-white hover:bg-purple-50 text-slate-700 hover:text-purple-700 px-2.5 py-1 rounded-full border border-slate-200 hover:border-purple-200 whitespace-nowrap transition shadow-2xs">
+              📋 Key takeaways?
+            </button>
+            <button onclick="sendFredPrompt('Draft a concise follow-up email recap for attendees.')" class="chip-preset bg-white hover:bg-purple-50 text-slate-700 hover:text-purple-700 px-2.5 py-1 rounded-full border border-slate-200 hover:border-purple-200 whitespace-nowrap transition shadow-2xs">
+              ✉️ Draft follow-up email
+            </button>
+            <button onclick="sendFredPrompt('What questions or topics were left unresolved?')" class="chip-preset bg-white hover:bg-purple-50 text-slate-700 hover:text-purple-700 px-2.5 py-1 rounded-full border border-slate-200 hover:border-purple-200 whitespace-nowrap transition shadow-2xs">
+              ❓ Unresolved items?
+            </button>
+            <button onclick="sendFredPrompt('List all deliverables, deadlines, and who is accountable.')" class="chip-preset bg-white hover:bg-purple-50 text-slate-700 hover:text-purple-700 px-2.5 py-1 rounded-full border border-slate-200 hover:border-purple-200 whitespace-nowrap transition shadow-2xs">
+              🎯 Deadlines & owners
+            </button>
+          </div>
+
+          <!-- Chat Messages Log Container -->
+          <div id="fredChatLog" class="bg-slate-50/70 border border-slate-200 rounded-2xl p-4 min-h-[300px] max-h-[440px] overflow-y-auto space-y-4"></div>
+
+          <!-- Input Form -->
+          <form onsubmit="handleFredChatSubmit(event)" class="flex items-center gap-2">
+            <input type="text" id="fredChatInput" placeholder="Ask Aura anything about this meeting..." class="flex-1 bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs text-slate-800 placeholder-slate-400 outline-none focus:border-purple-600 focus:ring-1 focus:ring-purple-600 transition shadow-2xs">
+            <button type="submit" id="fredChatSendBtn" class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold text-xs px-5 py-2.5 rounded-xl transition flex items-center gap-2 shadow-md shadow-purple-500/20 shrink-0">
+              <i class="fa-solid fa-paper-plane"></i>
+              <span>Ask</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- TRANSCRIPT SECTION (Always Accessible) -->
+        <div class="pt-2 border-t border-slate-200">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-3 gap-2">
+            <div class="flex items-center gap-2">
+              <h3 class="text-xs font-bold uppercase tracking-wider text-purple-700 flex items-center gap-2">
+                <i class="fa-solid fa-microphone-lines"></i> Verbatim Speaker Transcript
+              </h3>
+              <span id="transcriptCountBadge" class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full font-mono font-medium">0 turns</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+              <div class="flex items-center gap-1 bg-slate-100 p-1 rounded-lg border border-slate-200 text-[11px]">
+                <button id="filterChip-all" onclick="setTranscriptFilter('all')" class="transcript-filter-chip px-2 py-0.5 rounded font-bold text-purple-700 bg-white shadow-2xs transition">All</button>
+                <button id="filterChip-actions" onclick="setTranscriptFilter('actions')" class="transcript-filter-chip px-2 py-0.5 rounded text-slate-600 hover:text-slate-900 transition">🎯 Actions</button>
+                <button id="filterChip-questions" onclick="setTranscriptFilter('questions')" class="transcript-filter-chip px-2 py-0.5 rounded text-slate-600 hover:text-slate-900 transition">❓ Questions</button>
+                <button id="filterChip-decisions" onclick="setTranscriptFilter('decisions')" class="transcript-filter-chip px-2 py-0.5 rounded text-slate-600 hover:text-slate-900 transition">💡 Decisions</button>
+              </div>
+
+              <select id="transcriptSpeakerFilter" onchange="filterTranscript()" class="text-[11px] bg-white border border-slate-200 rounded px-2 py-1 text-slate-700 outline-none focus:border-purple-600 shadow-2xs">
+                <option value="all">All Speakers</option>
+              </select>
+
+              <input type="text" id="transcriptSearchInput" oninput="filterTranscript()" placeholder="Search speech..." class="text-[11px] bg-white border border-slate-200 rounded px-2.5 py-1 text-slate-700 outline-none focus:border-purple-600 shadow-2xs w-36">
+              
+              <button onclick="copyFullTranscript()" id="copyTranscriptBtn" class="text-[11px] bg-white hover:bg-slate-50 text-slate-700 px-2.5 py-1 rounded transition flex items-center gap-1 border border-slate-200 shadow-2xs">
+                <i class="fa-solid fa-copy"></i> Copy Text
+              </button>
+            </div>
+          </div>
+
+          <div id="detailTranscriptList" class="space-y-2 bg-slate-50/60 border border-slate-200 rounded-xl p-4 max-h-96 overflow-y-auto font-sans"></div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- SECTION: INTERACTIVE TIME-SAVED & ROI CALCULATOR                          -->
+    <!-- ========================================================================= -->
+    <section id="calculator" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full space-y-12 border-t border-slate-200/80">
+      
+      <div class="text-center max-w-3xl mx-auto space-y-3">
+        <span class="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3.5 py-1 rounded-full border border-emerald-200/80 shadow-2xs">
+          <i class="fa-solid fa-calculator text-emerald-600"></i> Interactive Productivity Estimator
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">Calculate how much time your team reclaims</h2>
+        <p class="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal">
+          See the direct impact of automated AI meeting notes, diarization, and instant follow-ups on your organization's bottom line.
+        </p>
+      </div>
+
+      <div class="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-10 shadow-xl shadow-violet-500/5 max-w-5xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <!-- Left: Sliders -->
+          <div class="lg:col-span-6 space-y-7">
+            
+            <!-- Slider 1: Team Members -->
+            <div class="space-y-3">
+              <div class="flex items-center justify-between text-xs">
+                <label class="font-bold text-slate-800 flex items-center gap-2">
+                  <i class="fa-solid fa-users text-violet-600"></i> Team Members
+                </label>
+                <span id="roiTeamVal" class="text-base font-extrabold font-mono text-violet-700 bg-violet-50 px-3 py-1 rounded-xl border border-violet-200/80">10 people</span>
+              </div>
+              <input type="range" id="roiTeamSlider" min="1" max="100" value="10" step="1" oninput="updateRoiCalc()" class="w-full custom-slider cursor-pointer">
+              <div class="flex justify-between text-[10px] text-slate-400 font-mono">
+                <span>1 member</span>
+                <span>50 members</span>
+                <span>100 members</span>
+              </div>
+            </div>
+
+            <!-- Slider 2: Weekly Meetings -->
+            <div class="space-y-3">
+              <div class="flex items-center justify-between text-xs">
+                <label class="font-bold text-slate-800 flex items-center gap-2">
+                  <i class="fa-solid fa-calendar-check text-indigo-600"></i> Meetings per Person / Week
+                </label>
+                <span id="roiMeetingsVal" class="text-base font-extrabold font-mono text-indigo-700 bg-indigo-50 px-3 py-1 rounded-xl border border-indigo-200/80">8 meetings</span>
+              </div>
+              <input type="range" id="roiMeetingsSlider" min="1" max="30" value="8" step="1" oninput="updateRoiCalc()" class="w-full custom-slider cursor-pointer">
+              <div class="flex justify-between text-[10px] text-slate-400 font-mono">
+                <span>1 meeting</span>
+                <span>15 meetings</span>
+                <span>30 meetings</span>
+              </div>
+            </div>
+
+            <p class="text-[11px] text-slate-500 italic">
+              *Based on an industry average of 45 minutes saved per meeting on documentation, synthesis, and email follow-ups.
+            </p>
+          </div>
+
+          <!-- Right: Dynamic Results -->
+          <div class="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            
+            <div class="p-5 rounded-2xl bg-gradient-to-br from-violet-600 to-purple-600 text-white shadow-lg shadow-violet-500/25 space-y-1">
+              <p class="text-[11px] font-semibold text-violet-200 uppercase tracking-wider">Hours Saved / Month</p>
+              <h3 id="roiHoursSaved" class="text-3xl sm:text-4xl font-extrabold font-mono">240 hrs</h3>
+              <p class="text-[11px] text-violet-100 pt-1">Reclaimed for shipping & strategy</p>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-slate-900 text-white shadow-lg space-y-1">
+              <p class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Productivity Value / Mo</p>
+              <h3 id="roiCostSaved" class="text-3xl sm:text-4xl font-extrabold font-mono text-emerald-400">$10,800</h3>
+              <p class="text-[11px] text-slate-400 pt-1">Estimated team bandwidth saved</p>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+              <p class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Efficiency Gain</p>
+              <h3 id="roiEfficiency" class="text-2xl font-extrabold font-mono text-slate-900">+68% Faster</h3>
+              <p class="text-[11px] text-slate-500">Accelerated meeting follow-up cycle</p>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-emerald-50 border border-emerald-200/80 space-y-1">
+              <p class="text-[11px] font-semibold text-emerald-700 uppercase tracking-wider">Cloud Fees Avoided</p>
+              <h3 id="roiFeesAvoided" class="text-2xl font-extrabold font-mono text-emerald-800">$2,400 / yr</h3>
+              <p class="text-[11px] text-emerald-700">100% Free Self-Hosted Gemini Core</p>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SELF-HOSTED VS FIREFLIES CLOUD COMPARISON -->
+    <section id="pricing" class="py-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto w-full space-y-8 border-t border-slate-200/80">
+      <div class="text-center space-y-2">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-purple-700">Privacy & Freedom</h2>
+        <h3 class="text-3xl font-extrabold text-slate-900 tracking-tight">Why Our Self-Hosted Solution Wins</h3>
+        <p class="text-xs sm:text-sm text-slate-600">Zero per-user monthly bills. Complete sovereign ownership of your confidential business audio.</p>
+      </div>
+
+      <div class="overflow-x-auto border border-slate-200/90 rounded-2xl bg-white shadow-sm">
+        <table class="w-full text-left text-xs">
+          <thead class="bg-slate-50 text-slate-700 uppercase font-bold border-b border-slate-200">
+            <tr>
+              <th class="px-5 py-4">Capability</th>
+              <th class="px-5 py-4 text-purple-700 font-extrabold">Gemini Meeting Agent (Self-Hosted)</th>
+              <th class="px-5 py-4 text-slate-500 font-semibold">Fireflies.ai Cloud Plan</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr class="hover:bg-slate-50/70 transition">
+              <td class="px-5 py-3 font-semibold text-slate-900">Monthly Subscription</td>
+              <td class="px-5 py-3 text-emerald-600 font-bold"><i class="fa-solid fa-check mr-1.5"></i> $0 / month (100% Free)</td>
+              <td class="px-5 py-3 text-slate-500">$10 – $29 / user / month</td>
+            </tr>
+            <tr class="hover:bg-slate-50/70 transition">
+              <td class="px-5 py-3 font-semibold text-slate-900">Audio & Data Privacy</td>
+              <td class="px-5 py-3 text-emerald-600 font-bold"><i class="fa-solid fa-check mr-1.5"></i> 100% On-Premise / Local Storage</td>
+              <td class="px-5 py-3 text-slate-500">Sent & stored on 3rd-party cloud</td>
+            </tr>
+            <tr class="hover:bg-slate-50/70 transition">
+              <td class="px-5 py-3 font-semibold text-slate-900">Underlying AI Engine</td>
+              <td class="px-5 py-3 text-emerald-600 font-bold"><i class="fa-solid fa-check mr-1.5"></i> Google Gemini 2.5 Flash</td>
+              <td class="px-5 py-3 text-slate-500">Generic proprietary cloud model</td>
+            </tr>
+            <tr class="hover:bg-slate-50/70 transition">
+              <td class="px-5 py-3 font-semibold text-slate-900">Meeting Duration Cap</td>
+              <td class="px-5 py-3 text-emerald-600 font-bold"><i class="fa-solid fa-check mr-1.5"></i> Unlimited audio length</td>
+              <td class="px-5 py-3 text-slate-500">Credit / minute limits on free tiers</td>
+            </tr>
+            <tr class="hover:bg-slate-50/70 transition">
+              <td class="px-5 py-3 font-semibold text-slate-900">Conversational AI Co-Pilot</td>
+              <td class="px-5 py-3 text-emerald-600 font-bold"><i class="fa-solid fa-check mr-1.5"></i> Built-in & Grounded with Follow-ups</td>
+              <td class="px-5 py-3 text-slate-500">Paid add-on tier requirement</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- SECTION: ACCORDION FAQ (Fireflies Knowledge Base Motif)                   -->
+    <!-- ========================================================================= -->
+    <section id="faq" class="py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto w-full space-y-10 border-t border-slate-200/80">
+      <div class="text-center space-y-3">
+        <span class="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-violet-700 bg-violet-50 px-3.5 py-1 rounded-full border border-violet-200/80 shadow-2xs">
+          <i class="fa-solid fa-circle-question text-violet-600"></i> Common Inquiries
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">Frequently Asked Questions</h2>
+        <p class="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto leading-relaxed font-normal">
+          Everything you need to know about self-hosting, speech processing, and conversational AI.
+        </p>
+      </div>
+
+      <div class="space-y-3" id="faqAccordion">
+        
+        <!-- FAQ 0 -->
+        <div class="border border-slate-200/90 rounded-2xl bg-white shadow-2xs overflow-hidden transition">
+          <button onclick="toggleFaq(0)" class="w-full px-5 py-4 text-left flex items-center justify-between gap-4 hover:bg-slate-50/80 transition">
+            <span class="font-bold text-xs sm:text-sm text-slate-900">How accurate is the transcription and speaker diarization?</span>
+            <i id="faqIcon-0" class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform"></i>
+          </button>
+          <div id="faqAnswer-0" class="hidden px-5 pb-5 text-xs text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+            MeetFlow achieves 95%+ speech-to-text accuracy using Google Gemini 2.5 Flash. It captures high-fidelity WebRTC system audio without lossy compression and accurately diarizes participants into distinct conversational speaker turns (Host, Attendee) with sub-second timestamps.
+          </div>
+        </div>
+
+        <!-- FAQ 1 -->
+        <div class="border border-slate-200/90 rounded-2xl bg-white shadow-2xs overflow-hidden transition">
+          <button onclick="toggleFaq(1)" class="w-full px-5 py-4 text-left flex items-center justify-between gap-4 hover:bg-slate-50/80 transition">
+            <span class="font-bold text-xs sm:text-sm text-slate-900">Is my audio and conversation confidential and private?</span>
+            <i id="faqIcon-1" class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform"></i>
+          </button>
+          <div id="faqAnswer-1" class="hidden px-5 pb-5 text-xs text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+            Yes, 100%. Unlike commercial SaaS meeting recorders that store your private audio on shared clouds, MeetFlow stores your recordings and SQLite database entirely on your local machine or private server. Only your private Gemini API key is used to transcribe speech.
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="border border-slate-200/90 rounded-2xl bg-white shadow-2xs overflow-hidden transition">
+          <button onclick="toggleFaq(2)" class="w-full px-5 py-4 text-left flex items-center justify-between gap-4 hover:bg-slate-50/80 transition">
+            <span class="font-bold text-xs sm:text-sm text-slate-900">How does self-hosted MeetFlow compare to paying for Fireflies.ai cloud?</span>
+            <i id="faqIcon-2" class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform"></i>
+          </button>
+          <div id="faqAnswer-2" class="hidden px-5 pb-5 text-xs text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+            Fireflies.ai charges between $10 and $29 per user per month with strict audio storage and credit limits on lower tiers. MeetFlow is 100% free and open-source self-hosted software with no user subscription fees, no artificial duration caps, and complete data sovereignty.
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="border border-slate-200/90 rounded-2xl bg-white shadow-2xs overflow-hidden transition">
+          <button onclick="toggleFaq(3)" class="w-full px-5 py-4 text-left flex items-center justify-between gap-4 hover:bg-slate-50/80 transition">
+            <span class="font-bold text-xs sm:text-sm text-slate-900">Can I export Minutes of Meeting to PDF, Word, or Markdown?</span>
+            <i id="faqIcon-3" class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform"></i>
+          </button>
+          <div id="faqAnswer-3" class="hidden px-5 pb-5 text-xs text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+            Yes! With one click you can download publication-ready ReportLab PDF Minutes of Meeting containing executive summaries, structured decisions, and action item tables. You can also copy formatted speech transcripts directly to your clipboard.
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="border border-slate-200/90 rounded-2xl bg-white shadow-2xs overflow-hidden transition">
+          <button onclick="toggleFaq(4)" class="w-full px-5 py-4 text-left flex items-center justify-between gap-4 hover:bg-slate-50/80 transition">
+            <span class="font-bold text-xs sm:text-sm text-slate-900">Which meeting platforms and audio formats are supported?</span>
+            <i id="faqIcon-4" class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform"></i>
+          </button>
+          <div id="faqAnswer-4" class="hidden px-5 pb-5 text-xs text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+            MeetFlow supports seamless in-browser tab recording across Google Meet, Microsoft Teams, and Zoom via the Chrome extension. You can also process any pre-recorded audio files in .wav, .mp3, .webm, or .ogg formats via the Upload button.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- PRE-FOOTER HIGH-IMPACT CTA BANNER                                         -->
+    <!-- ========================================================================= -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+      <div class="bg-gradient-to-r from-violet-900 via-indigo-900 to-slate-900 text-white rounded-3xl p-8 sm:p-14 shadow-2xl relative overflow-hidden text-center space-y-6">
+        <div class="absolute -top-24 -left-24 w-72 h-72 bg-violet-500/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -right-24 w-72 h-72 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <div class="relative max-w-2xl mx-auto space-y-3">
+          <span class="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-violet-200 bg-white/10 px-3.5 py-1 rounded-full border border-white/15 backdrop-blur-sm">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            Private • Self-Hosted • Sovereign
+          </span>
+          <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight">
+            Supercharge your meeting productivity today
+          </h2>
+          <p class="text-xs sm:text-sm text-violet-100 font-normal leading-relaxed">
+            Record, transcribe, analyze, and automate post-call follow-ups with Google Gemini AI. Zero monthly per-user bills.
+          </p>
+        </div>
+
+        <div class="relative flex flex-wrap items-center justify-center gap-3 pt-2">
+          <button onclick="switchMainView('notebook')" class="px-6 py-3.5 rounded-xl bg-white hover:bg-slate-100 text-violet-950 font-bold text-xs sm:text-sm shadow-xl flex items-center gap-2 transition transform hover:-translate-y-0.5">
+            <i class="fa-solid fa-play text-xs text-violet-600"></i>
+            <span>Start for Free — Open Notebook</span>
+          </button>
+          <button onclick="document.getElementById('liveDemoSection').scrollIntoView({behavior: 'smooth'})" class="px-5 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-xs sm:text-sm border border-white/20 backdrop-blur-sm transition">
+            <i class="fa-solid fa-wand-magic-sparkles text-violet-300 mr-1.5"></i>
+            <span>Explore Live Demo Sandbox</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- COMPREHENSIVE 4-COLUMN ENTERPRISE FOOTER                                  -->
+    <!-- ========================================================================= -->
+    <footer class="mt-auto border-t border-slate-200 bg-white py-14 px-4 sm:px-6 lg:px-8 text-xs text-slate-500">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 pb-10 border-b border-slate-100 text-left">
+        
+        <!-- Col 1: Brand -->
+        <div class="md:col-span-4 space-y-4">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-violet-600 via-purple-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-violet-500/25">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none"><path d="M12 2L14.2 8.3L20.5 10.5L14.2 12.7L12 19L9.8 12.7L3.5 10.5L9.8 8.3L12 2Z" fill="currentColor"/></svg>
+            </div>
+            <span class="font-extrabold text-lg tracking-tight text-slate-900">MeetFlow<span class="text-violet-600">.ai</span></span>
+          </div>
+          <p class="text-xs text-slate-600 max-w-sm leading-relaxed">
+            Gemini Meeting Agent Engine • Autonomous intelligence, speaker diarization, executive summaries, and voice AI for Google Meet, Teams, and Telephony.
+          </p>
+          <div class="flex items-center gap-2 text-[11px] font-mono text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200/80 w-fit">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span>100% Self-Hosted & Local Storage</span>
+          </div>
+        </div>
+
+        <!-- Col 2: Product -->
+        <div class="md:col-span-2 space-y-3">
+          <h4 class="font-bold text-xs uppercase tracking-wider text-slate-900">Product</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#features" class="hover:text-violet-700 transition">Transcribe & Record</a></li>
+            <li><a href="#features" class="hover:text-violet-700 transition">AI Super Summaries</a></li>
+            <li><a href="#askaura-spotlight" class="hover:text-violet-700 transition">Ask Aura Co-Pilot</a></li>
+            <li><a href="#intelligence" class="hover:text-violet-700 transition">Speaker Diarization</a></li>
+            <li><a href="#calculator" class="hover:text-violet-700 transition">ROI Calculator</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Integrations -->
+        <div class="md:col-span-3 space-y-3">
+          <h4 class="font-bold text-xs uppercase tracking-wider text-slate-900">Ecosystem & Integrations</h4>
+          <ul class="space-y-2 text-xs">
+            <li><button onclick="openExtensionModal()" class="hover:text-violet-700 transition flex items-center gap-1.5"><i class="fa-brands fa-chrome text-amber-500 text-[10px]"></i> Chrome Extension (.ZIP)</button></li>
+            <li><span class="flex items-center gap-1.5"><i class="fa-brands fa-microsoft text-indigo-600 text-[10px]"></i> Microsoft Teams Capture</span></li>
+            <li><span class="flex items-center gap-1.5"><i class="fa-solid fa-file-pdf text-red-500 text-[10px]"></i> ReportLab PDF Export</span></li>
+            <li><span class="flex items-center gap-1.5"><i class="fa-solid fa-paper-plane text-violet-600 text-[10px]"></i> SMTP Email Recaps</span></li>
+            <li><a href="/docs" target="_blank" class="hover:text-violet-700 transition flex items-center gap-1"><i class="fa-solid fa-code text-slate-400 text-[10px]"></i> REST API & Swagger</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Privacy & Comparison -->
+        <div class="md:col-span-3 space-y-3">
+          <h4 class="font-bold text-xs uppercase tracking-wider text-slate-900">Privacy & Sovereign AI</h4>
+          <ul class="space-y-2 text-xs">
+            <li><span class="flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-emerald-600 text-[10px]"></i> Zero 3rd-Party Audio Leaks</span></li>
+            <li><span class="flex items-center gap-1.5"><i class="fa-solid fa-server text-purple-600 text-[10px]"></i> Local SQLite Storage</span></li>
+            <li><span class="flex items-center gap-1.5"><i class="fa-solid fa-microchip text-indigo-600 text-[10px]"></i> Google Gemini 2.5 Flash</span></li>
+            <li><a href="#pricing" class="hover:text-violet-700 transition">Gemini Meeting Agent vs Cloud</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="max-w-7xl mx-auto pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-400">
+        <p>© 2026 MeetFlow AI. Gemini Meeting Agent Engine. All rights reserved.</p>
+        <div class="flex items-center gap-4">
+          <a href="/docs" target="_blank" class="hover:text-slate-600 transition">API Documentation</a>
+          <span>•</span>
+          <a href="#pricing" class="hover:text-slate-600 transition">Privacy & Architecture</a>
+          <span>•</span>
+          <button onclick="openSettingsModal()" class="hover:text-slate-600 transition">Gemini Settings</button>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- VIEW 2: NOTEBOOK APP WORKSPACE                                            -->
+  <!-- ========================================================================= -->
+  <div id="notebookView" class="hidden w-full flex-1 flex flex-col p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto space-y-6 aurora-canvas">
+
+    <!-- Top Workspace Navigation Bar -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-200/80 gap-4">
+      <div class="flex items-center gap-3">
+        <button onclick="switchMainView('landing')" class="text-xs bg-white hover:bg-slate-50 text-slate-700 px-3 py-1.5 rounded-xl border border-slate-200 transition flex items-center gap-1.5 shadow-2xs font-medium">
+          <i class="fa-solid fa-arrow-left text-[10px] text-violet-600"></i>
+          <span>Overview</span>
+        </button>
+        <div>
+          <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+            <span>Meeting Notebook</span>
+            <span id="notebookCountBadge" class="text-xs bg-purple-50 text-purple-700 border border-purple-200 px-2 py-0.5 rounded-full font-mono font-bold">0</span>
+          </h2>
+          <p class="text-xs text-slate-500">All recorded conversations, speaker intelligence, and action items</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button onclick="loadMeetings(true)" class="text-xs bg-white hover:bg-slate-50 text-purple-700 font-semibold px-3 py-2 rounded-xl border border-slate-200 transition flex items-center gap-1.5 shadow-2xs">
+          <i class="fa-solid fa-rotate-right"></i> Refresh
+        </button>
+        <button onclick="promptDeleteAllMeetings()" class="text-xs bg-red-50 hover:bg-red-100 text-red-700 font-medium px-3 py-2 rounded-xl border border-red-200 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-trash-can"></i> Clear All
+        </button>
+        <button onclick="document.getElementById('uploadModal').classList.remove('hidden')" class="text-xs bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold px-4 py-2 rounded-xl transition flex items-center gap-1.5 shadow-md shadow-purple-500/20">
+          <i class="fa-solid fa-cloud-arrow-up"></i> Upload Recording
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Workspace Layout: Sidebar List + Meeting Inspector -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+      <!-- Left Sidebar: Meetings List -->
+      <div class="lg:col-span-4 space-y-3">
+        <input type="text" id="workspaceSearchInput" oninput="filterMeetingsList()" placeholder="Search meetings by title or topic..." class="w-full text-xs bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-slate-800 outline-none focus:border-purple-600 placeholder-slate-400 shadow-2xs">
+        
+        <div id="workspaceMeetingsList" class="space-y-2.5 max-h-[720px] overflow-y-auto pr-1">
+          <!-- Dynamically populated meetings cards -->
+        </div>
+      </div>
+
+      <!-- Right Stage: Selected Meeting View -->
+      <div class="lg:col-span-8">
+        
+        <!-- Empty State -->
+        <div id="workspaceEmptyState" class="bg-white border border-slate-200/90 rounded-2xl p-12 text-center text-slate-500 flex flex-col items-center justify-center min-h-[520px] shadow-sm">
+          <div class="w-16 h-16 rounded-2xl bg-purple-50 border border-purple-100 flex items-center justify-center mb-4 text-purple-600 text-2xl">
+            <i class="fa-solid fa-microphone-lines"></i>
+          </div>
+          <h3 class="text-lg font-bold text-slate-900">Select a meeting from the Notebook</h3>
+          <p class="text-xs text-slate-500 max-w-sm mt-2 leading-relaxed">
+            Choose a recorded session on the left to inspect speaker talk-time ratios, click-to-seek audio playback, and chat with Ask Aura.
+          </p>
+        </div>
+
+        <!-- Meeting Workspace Detail Panel -->
+        <div id="workspaceDetailPanel" class="hidden bg-white border border-slate-200/90 rounded-2xl p-6 space-y-6 shadow-sm">
+          <!-- Populated synchronously with active meeting -->
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- MODALS (Upload Audio, API Key Settings, Delete Confirmation)             -->
+  <!-- ========================================================================= -->
+
+  <!-- Upload Modal -->
+  <div id="uploadModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+    <div class="bg-white border border-slate-200 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+          <i class="fa-solid fa-cloud-arrow-up text-purple-600"></i> Process Audio Recording
+        </h3>
+        <button onclick="document.getElementById('uploadModal').classList.add('hidden')" class="text-slate-400 hover:text-slate-700 text-lg">&times;</button>
+      </div>
+
+      <form id="uploadForm" onsubmit="handleAudioUpload(event)" class="space-y-4 text-xs">
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Meeting Title</label>
+          <input type="text" id="uploadTitle" required value="Product Strategy Sync" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-slate-900 outline-none focus:border-purple-600">
+        </div>
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Participants (comma separated)</label>
+          <input type="text" id="uploadParticipants" placeholder="Host (host@example.com), Alex (alex@example.com)" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-slate-900 outline-none focus:border-purple-600">
+        </div>
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Audio File (.webm, .wav, .mp3, .ogg)</label>
+          <input type="file" id="uploadAudioFile" required accept="audio/*" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-slate-700 file:mr-3 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-xs file:bg-purple-600 file:text-white">
+        </div>
+        <div class="flex items-center gap-2">
+          <input type="checkbox" id="uploadAutoEmail" checked class="rounded bg-slate-50 border-slate-300 text-purple-600 focus:ring-0">
+          <label for="uploadAutoEmail" class="text-slate-700">Automatically dispatch recap email to attendees</label>
+        </div>
+        <div class="flex justify-end gap-2 pt-2 border-t border-slate-100">
+          <button type="button" onclick="document.getElementById('uploadModal').classList.add('hidden')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 rounded-lg text-slate-700 font-medium">Cancel</button>
+          <button type="submit" id="uploadSubmitBtn" class="px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 rounded-lg text-white font-semibold flex items-center gap-2 shadow-md shadow-purple-500/20">
+            <span>Process with Gemini</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Settings / API Key Modal -->
+  <div id="settingsModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+    <div class="bg-white border border-slate-200 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+          <i class="fa-solid fa-key text-amber-500"></i> Google Gemini Configuration
+        </h3>
+        <button onclick="document.getElementById('settingsModal').classList.add('hidden')" class="text-slate-400 hover:text-slate-700 text-lg">&times;</button>
+      </div>
+
+      <div class="space-y-4 text-xs">
+        <p class="text-slate-600 leading-relaxed">
+          Google Gemini 2.5 Flash is used to transcribe audio, extract Minutes of Meeting, and power the Ask Aura AI co-pilot.
+        </p>
+        <div class="bg-purple-50/70 p-3.5 rounded-xl border border-purple-200 text-slate-700">
+          <p class="font-bold text-purple-900 mb-1 flex items-center gap-1.5">
+            <i class="fa-solid fa-circle-info text-purple-600"></i> Need an API Key?
+          </p>
+          You can generate a free Gemini API key in seconds at:
+          <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-purple-700 font-bold hover:underline block mt-1 font-mono">
+            👉 https://aistudio.google.com/app/apikey
+          </a>
+        </div>
+
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Gemini API Key</label>
+          <input type="password" id="geminiApiKeyInput" placeholder="AIzaSy..." class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-slate-900 outline-none focus:border-purple-600 font-mono">
+        </div>
+
+        <div id="keyStatusFeedback" class="text-xs hidden p-2.5 rounded-lg border"></div>
+
+        <div class="flex items-center justify-between pt-2 border-t border-slate-100">
+          <button type="button" onclick="testGeminiKey()" id="testKeyBtn" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded-lg flex items-center gap-1.5 transition">
+            <i class="fa-solid fa-plug text-purple-600"></i> Test Connection
+          </button>
+          <div class="flex gap-2">
+            <button type="button" onclick="document.getElementById('settingsModal').classList.add('hidden')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 rounded-lg text-slate-700 font-medium">Cancel</button>
+            <button type="button" onclick="saveGeminiKey()" id="saveKeyBtn" class="px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 rounded-lg text-white font-semibold flex items-center gap-1.5 shadow-md shadow-purple-500/20">
+              <i class="fa-solid fa-check"></i> Save Key
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div id="deleteModal" onclick="if (event.target === this) closeDeleteModal()" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+    <div class="bg-white border border-slate-200 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3 text-red-600">
+          <div class="w-10 h-10 rounded-xl bg-red-50 border border-red-200 flex items-center justify-center text-lg shrink-0">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-slate-900">Delete Meeting</h3>
+            <p class="text-xs text-slate-500">This action cannot be undone</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeDeleteModal()" class="text-slate-400 hover:text-slate-700 text-lg">&times;</button>
+      </div>
+
+      <div id="deleteModalText" class="text-xs text-slate-600 leading-relaxed bg-slate-50 p-3.5 rounded-xl border border-slate-200"></div>
+
+      <div class="flex justify-end gap-2 pt-2 border-t border-slate-100">
+        <button type="button" onclick="closeDeleteModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs text-slate-700 font-medium">Cancel</button>
+        <button type="button" id="confirmDeleteBtn" onclick="executeDeleteMeeting()" class="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg text-xs text-white font-semibold flex items-center gap-1.5 shadow-sm">
+          <i class="fa-solid fa-trash-can"></i> Yes, Delete Meeting
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chrome Extension Download & Installation Modal -->
+  <div id="extensionModal" onclick="if (event.target === this) closeExtensionModal()" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+    <div class="bg-white border border-slate-200 rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl space-y-6">
+      
+      <!-- Modal Header -->
+      <div class="flex items-start justify-between border-b border-slate-100 pb-4">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-500 via-emerald-500 to-sky-500 p-0.5 shadow-md shadow-sky-500/20 shrink-0">
+            <div class="w-full h-full bg-white rounded-[14px] flex items-center justify-center">
+              <i class="fa-brands fa-chrome text-2xl text-slate-800"></i>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="text-lg font-extrabold text-slate-900">MeetFlow Chrome Extension</h3>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-violet-100 text-violet-700">v1.0.0 MV3</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-0.5">Direct tab audio capture across Google Meet & Microsoft Teams</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeExtensionModal()" class="text-slate-400 hover:text-slate-700 text-xl font-bold p-1 leading-none">&times;</button>
+      </div>
+
+      <!-- Quick Download CTA Card -->
+      <div class="p-5 rounded-2xl bg-gradient-to-r from-violet-50 via-purple-50 to-indigo-50 border border-violet-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="space-y-1">
+          <p class="text-xs font-bold text-violet-950 flex items-center gap-1.5">
+            <i class="fa-solid fa-file-zipper text-violet-600"></i> Ready-to-Install Extension Package
+          </p>
+          <p class="text-[11px] text-slate-600">Download the zip file and load it directly into Chrome or Edge.</p>
+        </div>
+        <a href="/api/v1/extension/download" download="meetflow-ai-extension.zip" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-bold text-xs shadow-md shadow-violet-600/30 shrink-0 transition-transform hover:-translate-y-0.5">
+          <i class="fa-solid fa-download"></i> Download Extension (.ZIP)
+        </a>
+      </div>
+
+      <!-- 3-Step Setup Instructions -->
+      <div class="space-y-3">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400">Easy 3-Step Installation</h4>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+          <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1.5">
+            <div class="w-6 h-6 rounded-lg bg-violet-100 text-violet-700 font-bold flex items-center justify-center text-xs">1</div>
+            <p class="font-bold text-slate-900 text-[12px]">1. Extract ZIP</p>
+            <p class="text-[11px] text-slate-500 leading-normal">Unzip the downloaded <code class="bg-white px-1 py-0.5 rounded border border-slate-200 font-mono text-[10px]">meetflow-ai-extension.zip</code> file.</p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1.5">
+            <div class="w-6 h-6 rounded-lg bg-violet-100 text-violet-700 font-bold flex items-center justify-center text-xs">2</div>
+            <p class="font-bold text-slate-900 text-[12px]">2. Developer Mode</p>
+            <p class="text-[11px] text-slate-500 leading-normal">Open <code class="bg-white px-1 py-0.5 rounded border border-slate-200 font-mono text-[10px]">chrome://extensions</code> in a new tab & toggle Developer mode ON.</p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1.5">
+            <div class="w-6 h-6 rounded-lg bg-violet-100 text-violet-700 font-bold flex items-center justify-center text-xs">3</div>
+            <p class="font-bold text-slate-900 text-[12px]">3. Load Unpacked</p>
+            <p class="text-[11px] text-slate-500 leading-normal">Click "Load unpacked" and pick the unzipped folder. Pin the icon to record!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Inbuilt vs Extension comparison info -->
+      <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 flex items-start gap-3">
+        <i class="fa-solid fa-circle-info text-violet-600 mt-0.5 shrink-0 text-sm"></i>
+        <div class="space-y-1">
+          <p class="font-semibold text-slate-800">Prefer not to install an extension?</p>
+          <p class="text-[11px] text-slate-500 leading-relaxed">
+            MeetFlow AI also has a <strong>100% inbuilt web recorder and audio uploader</strong>. You can upload any meeting recording (.mp3, .wav, .webm) directly from the dashboard without needing any browser extension!
+          </p>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="flex items-center justify-between pt-2 border-t border-slate-100">
+        <span class="text-[11px] text-slate-400">Works with Google Chrome, Brave, and MS Edge</span>
+        <button type="button" onclick="closeExtensionModal()" class="px-5 py-2 bg-slate-100 hover:bg-slate-200 rounded-xl text-xs text-slate-700 font-semibold transition">Close</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- JAVASCRIPT LOGIC & FIREFLIES ENGINE                                       -->
+  <!-- ========================================================================= -->
+  <script>
+    function openExtensionModal() {
+      document.getElementById('extensionModal').classList.remove('hidden');
+    }
+    function closeExtensionModal() {
+      document.getElementById('extensionModal').classList.add('hidden');
+    }
+
+    // State
+    let currentMainView = 'landing'; // 'landing' or 'notebook'
+    let allMeetings = [];
+    let currentSelectedMeetingId = null;
+    let currentTranscriptSegments = [];
+    let currentTranscriptFilter = 'all';
+    let currentMeetingTab = 'summary';
+    let isFetchingMeetings = false;
+
+    // View Switcher (Landing Website vs Notebook Workspace)
+    function switchMainView(view) {
+      currentMainView = view;
+      const landing = document.getElementById('landingView');
+      const notebook = document.getElementById('notebookView');
+      const ctaBtn = document.getElementById('navNotebookCtaBtn');
+
+      if (view === 'notebook') {
+        landing.classList.add('hidden');
+        notebook.classList.remove('hidden');
+        if (ctaBtn) {
+          ctaBtn.innerHTML = '<i class="fa-solid fa-arrow-left text-[11px]"></i> <span class="whitespace-nowrap font-semibold">Overview</span>';
+          ctaBtn.setAttribute('onclick', "switchMainView('landing')");
+        }
+        window.location.hash = 'notebook';
+        renderWorkspaceMeetings();
+      } else {
+        notebook.classList.add('hidden');
+        landing.classList.remove('hidden');
+        if (ctaBtn) {
+          ctaBtn.innerHTML = '<i class="fa-solid fa-book-bookmark text-[11px]"></i> <span class="whitespace-nowrap font-semibold">Meeting Notebook</span> <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>';
+          ctaBtn.setAttribute('onclick', "switchMainView('notebook')");
+        }
+        window.location.hash = '';
+      }
+    }
+
+    // Toast helper
+    function showToast(message, isError = false) {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `p-3 rounded-xl border shadow-xl text-xs flex items-center gap-2 pointer-events-auto transition duration-300 ${isError ? 'bg-red-50 border-red-200 text-red-800' : 'bg-white border-purple-200 text-slate-800'}`;
+      toast.innerHTML = `<i class="fa-solid ${isError ? 'fa-triangle-exclamation text-red-500' : 'fa-circle-check text-purple-600'}"></i> <span>${message}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+      }, 4000);
+    }
+
+    // Load settings & API key status
+    async function checkSettings() {
+      try {
+        const res = await fetch('/api/v1/settings');
+        const data = await res.json();
+        const btnLabel = document.getElementById('navKeyLabel');
+        const dot = document.getElementById('navKeyDot');
+
+        if (data.gemini_api_key_configured) {
+          if (btnLabel) {
+            btnLabel.textContent = 'Gemini Active';
+            btnLabel.className = 'whitespace-nowrap font-medium text-slate-700';
+          }
+          if (dot) dot.className = 'w-2 h-2 rounded-full bg-emerald-500 ring-2 ring-emerald-100 shrink-0';
+        } else {
+          if (btnLabel) {
+            btnLabel.textContent = 'Setup Key';
+            btnLabel.className = 'whitespace-nowrap font-medium text-amber-700';
+          }
+          if (dot) dot.className = 'w-2 h-2 rounded-full bg-amber-500 ring-2 ring-amber-100 shrink-0';
+        }
+      } catch (e) {
+        console.warn('Settings check error:', e);
+      }
+    }
+
+    function openSettingsModal() {
+      document.getElementById('settingsModal').classList.remove('hidden');
+      document.getElementById('keyStatusFeedback').classList.add('hidden');
+    }
+
+    async function testGeminiKey() {
+      const btn = document.getElementById('testKeyBtn');
+      const feedback = document.getElementById('keyStatusFeedback');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Testing...';
+      feedback.classList.remove('hidden');
+      feedback.className = 'text-xs p-2.5 rounded-lg border bg-slate-50 border-slate-200 text-slate-700';
+      feedback.textContent = 'Testing connection with Google Gemini...';
+
+      try {
+        const res = await fetch('/api/v1/settings/test', { method: 'POST' });
+        const data = await res.json();
+        if (data.success) {
+          feedback.className = 'text-xs p-2.5 rounded-lg border bg-emerald-50 border-emerald-200 text-emerald-800 font-medium';
+          feedback.innerHTML = `<i class="fa-solid fa-circle-check mr-1 text-emerald-600"></i> Connected to model <strong>${data.model}</strong>.`;
+        } else {
+          feedback.className = 'text-xs p-2.5 rounded-lg border bg-red-50 border-red-200 text-red-700';
+          feedback.innerHTML = `<i class="fa-solid fa-triangle-exclamation mr-1"></i> ${data.error || 'Connection failed'}`;
+        }
+      } catch (err) {
+        feedback.className = 'text-xs p-2.5 rounded-lg border bg-red-50 border-red-200 text-red-700';
+        feedback.innerHTML = `<i class="fa-solid fa-triangle-exclamation mr-1"></i> Request failed: ${err.message}`;
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-plug text-purple-600"></i> Test Connection';
+      }
+    }
+
+    async function saveGeminiKey() {
+      const input = document.getElementById('geminiApiKeyInput');
+      const key = input.value.trim();
+      if (!key) {
+        showToast('Please enter a valid Gemini API key', true);
+        return;
+      }
+      const btn = document.getElementById('saveKeyBtn');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+
+      try {
+        const res = await fetch('/api/v1/settings/key', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ api_key: key })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          showToast('Gemini API Key configured and saved!');
+          document.getElementById('settingsModal').classList.add('hidden');
+          checkSettings();
+        } else {
+          showToast(data.detail || 'Failed to save key', true);
+        }
+      } catch (err) {
+        showToast('Failed to save key: ' + err.message, true);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Save Key';
+      }
+    }
+
+    // Load Meetings List
+    async function loadMeetings(force = false) {
+      if (isFetchingMeetings) return;
+      isFetchingMeetings = true;
+
+      try {
+        const res = await fetch('/api/v1/meetings');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+
+        allMeetings = data;
+        const countBadge = document.getElementById('notebookCountBadge');
+        if (countBadge) countBadge.textContent = data.length;
+
+        renderWorkspaceMeetings();
+
+        if (!currentSelectedMeetingId && data.length > 0) {
+          selectMeeting(data[0].id);
+        } else if (currentSelectedMeetingId) {
+          highlightSelectedSidebarCard(currentSelectedMeetingId);
+        }
+
+      } catch (err) {
+        console.error('Failed to load meetings:', err);
+      } finally {
+        isFetchingMeetings = false;
+      }
+    }
+
+    function parseMeetingDate(str) {
+      if (!str) return null;
+      const isoStr = (str.includes('Z') || str.match(/[+-]\d\d:\d\d$/)) ? str : (str.replace(' ', 'T') + 'Z');
+      const d = new Date(isoStr);
+      return isNaN(d.getTime()) ? new Date(str) : d;
+    }
+
+    function renderWorkspaceMeetings() {
+      const listEl = document.getElementById('workspaceMeetingsList');
+      if (!listEl) return;
+      listEl.innerHTML = '';
+
+      if (allMeetings.length === 0) {
+        listEl.innerHTML = '<div class="text-xs text-slate-500 p-6 bg-white rounded-xl text-center border border-slate-200">No meetings recorded yet.<br><span class="text-[11px] text-slate-400 mt-1 block">Start a recording via Chrome extension or upload audio.</span></div>';
+        return;
+      }
+
+      allMeetings.forEach(m => {
+        const item = document.createElement('div');
+        item.id = `workspace-card-${m.id}`;
+        item.dataset.id = m.id;
+        const isSelected = currentSelectedMeetingId === m.id;
+        item.className = `meeting-card p-3.5 rounded-xl border cursor-pointer transition ${isSelected ? 'bg-purple-50/90 border-purple-500 ring-1 ring-purple-500 shadow-xs' : 'bg-white border-slate-200 hover:border-purple-300 hover:shadow-xs'}`;
+        item.onclick = () => selectMeeting(m.id);
+
+        const sourceLabel = (m.source || 'meeting').replace('_', ' ').toUpperCase();
+        const d = parseMeetingDate(m.created_at);
+        const timeStr = d ? d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '';
+
+        item.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="text-[9px] font-semibold tracking-wider text-purple-700 bg-purple-50 px-1.5 py-0.5 rounded border border-purple-200">${sourceLabel}</span>
+            <div class="flex items-center gap-1.5">
+              <span class="text-[10px] text-slate-400 font-mono">${timeStr}</span>
+              <button onclick="event.stopPropagation(); promptDeleteMeeting(${m.id}, '${escapeHtml(m.title)}')" title="Delete meeting" class="text-slate-400 hover:text-red-600 p-1 rounded transition text-xs opacity-70 hover:opacity-100">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </div>
+          </div>
+          <h4 class="font-bold text-xs text-slate-900 mt-2 truncate">${escapeHtml(m.title)}</h4>
+          <div class="flex items-center justify-between text-[11px] text-slate-500 mt-2 pt-2 border-t border-slate-100">
+            <span><i class="fa-solid fa-users text-slate-400 mr-1"></i> ${m.participants_count}</span>
+            <span><i class="fa-solid fa-list-check text-slate-400 mr-1"></i> ${m.action_items_count} actions</span>
+            <span><i class="fa-solid fa-clock text-slate-400 mr-1"></i> ${m.duration_seconds ? m.duration_seconds + 's' : 'Audio'}</span>
+          </div>
+        `;
+        listEl.appendChild(item);
+      });
+    }
+
+    function highlightSelectedSidebarCard(id) {
+      document.querySelectorAll('.meeting-card').forEach(card => {
+        if (parseInt(card.dataset.id) === id) {
+          card.classList.add('bg-purple-50/90', 'border-purple-500', 'ring-1', 'ring-purple-500');
+          card.classList.remove('bg-white', 'border-slate-200');
+        } else {
+          card.classList.remove('bg-purple-50/90', 'border-purple-500', 'ring-1', 'ring-purple-500');
+          card.classList.add('bg-white', 'border-slate-200');
+        }
+      });
+    }
+
+    function filterMeetingsList() {
+      const q = document.getElementById('workspaceSearchInput').value.toLowerCase().trim();
+      if (!q) {
+        renderWorkspaceMeetings();
+        return;
+      }
+      const filtered = allMeetings.filter(m => m.title.toLowerCase().includes(q) || (m.source && m.source.toLowerCase().includes(q)));
+      const listEl = document.getElementById('workspaceMeetingsList');
+      listEl.innerHTML = '';
+      filtered.forEach(m => {
+        const item = document.createElement('div');
+        item.id = `workspace-card-${m.id}`;
+        item.dataset.id = m.id;
+        item.className = 'meeting-card p-3.5 rounded-xl border bg-white border-slate-200 hover:border-purple-300 cursor-pointer shadow-2xs';
+        item.onclick = () => selectMeeting(m.id);
+        item.innerHTML = `<h4 class="font-bold text-xs text-slate-900 truncate">${escapeHtml(m.title)}</h4>`;
+        listEl.appendChild(item);
+      });
+    }
+
+    // Select & View Meeting
+    async function selectMeeting(id) {
+      currentSelectedMeetingId = id;
+      highlightSelectedSidebarCard(id);
+
+      try {
+        const res = await fetch(`/api/v1/meetings/${id}`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const m = await res.json();
+
+        // Update Header Titles
+        document.querySelectorAll('#previewTitle').forEach(el => el.textContent = m.title);
+        document.querySelectorAll('#previewSourceBadge').forEach(el => el.textContent = (m.source || 'web_extension').replace('_', ' ').toUpperCase());
+        
+        const d = parseMeetingDate(m.created_at);
+        const createdDate = d ? d.toLocaleString() : 'Recent';
+        document.querySelectorAll('#previewMeta').forEach(el => el.textContent = `Recorded: ${createdDate} • Duration: ${m.duration_seconds || 0}s • ID: #${m.id}`);
+
+        // PDF Button
+        document.querySelectorAll('#previewPdfBtn').forEach(el => el.href = `/api/v1/meetings/${id}/pdf`);
+
+        // Audio Player
+        const audioContainer = document.getElementById('audioPlayerContainer');
+        const audioElement = document.getElementById('meetingAudioElement');
+        const audioDownloadLink = document.getElementById('audioDownloadLink');
+
+        if (m.has_audio) {
+          audioContainer.classList.remove('hidden');
+          currentAudioDuration = m.duration_seconds || 0;
+          document.querySelectorAll('#playerTotalDuration').forEach(el => {
+            el.textContent = formatSecondsToTime(currentAudioDuration);
+          });
+          const audioUrl = `/api/v1/meetings/${id}/audio?t=${Date.now()}`;
+          audioElement.src = audioUrl;
+          audioElement.load();
+          if (audioDownloadLink) audioDownloadLink.href = `/api/v1/meetings/${id}/audio`;
+          updatePlayerPlayBtn(false);
+          document.querySelectorAll('#playerCurrentTime').forEach(el => el.textContent = '00:00');
+          document.querySelectorAll('#playerProgressBar').forEach(progBar => {
+            progBar.value = 0;
+          });
+        } else {
+          audioContainer.classList.add('hidden');
+          audioElement.removeAttribute('src');
+          audioElement.load();
+        }
+
+        // Minutes & Structured Data
+        if (m.minutes) {
+          document.querySelectorAll('#previewSentimentBadge').forEach(el => el.textContent = m.minutes.overall_sentiment || 'Productive');
+          document.querySelectorAll('#detailExecutiveSummary').forEach(el => el.textContent = m.minutes.executive_summary || 'No summary available.');
+
+          // Decisions
+          document.querySelectorAll('#detailDecisionsList').forEach(decEl => {
+            decEl.innerHTML = '';
+            const decisions = m.minutes.key_decisions || [];
+            if (decisions.length === 0) {
+              decEl.innerHTML = '<li class="text-slate-400 italic">No formal decisions recorded.</li>';
+            } else {
+              decisions.forEach(dec => {
+                const li = document.createElement('li');
+                li.textContent = dec;
+                decEl.appendChild(li);
+              });
+            }
+          });
+
+          // Action Items
+          document.querySelectorAll('#detailActionsTable').forEach(actionsEl => {
+            actionsEl.innerHTML = '';
+            const actionItems = m.action_items || [];
+            document.querySelectorAll('#tabBadgeActionsCount').forEach(badge => badge.textContent = actionItems.length);
+
+            if (actionItems.length === 0) {
+              actionsEl.innerHTML = '<tr><td colspan="5" class="px-4 py-4 text-center text-slate-400 italic">No action items assigned.</td></tr>';
+            } else {
+              actionItems.forEach(a => {
+                const tr = document.createElement('tr');
+                const isCompleted = a.status === 'Completed';
+                tr.className = `hover:bg-slate-50/80 transition ${isCompleted ? 'bg-slate-50/40 opacity-75' : ''}`;
+                
+                let prioBadge = 'bg-slate-100 text-slate-700 border-slate-200';
+                if (a.priority === 'High' || a.priority === 'Urgent') prioBadge = 'bg-rose-50 text-rose-700 border-rose-200/80';
+                else if (a.priority === 'Medium') prioBadge = 'bg-amber-50 text-amber-700 border-amber-200/80';
+
+                const initial = (a.assignee_name || 'U').charAt(0).toUpperCase();
+
+                tr.innerHTML = `
+                  <td class="px-4 py-3.5">
+                    <div class="flex items-start gap-2.5">
+                      <input type="checkbox" onchange="toggleActionStatus(${a.id}, '${a.status}')" ${isCompleted ? 'checked' : ''} class="mt-0.5 rounded text-violet-600 focus:ring-violet-500 cursor-pointer">
+                      <div>
+                        <p class="font-semibold text-xs text-slate-900 ${isCompleted ? 'line-through text-slate-400 font-normal' : ''}">${escapeHtml(a.task)}</p>
+                        ${a.context_quote ? '<div class="text-[10px] text-slate-500 italic mt-0.5 font-normal">&ldquo;' + escapeHtml(a.context_quote) + '&rdquo;</div>' : ''}
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-4 py-3.5 text-slate-700 whitespace-nowrap">
+                    <div class="flex items-center">
+                      <span class="w-5 h-5 rounded-full bg-violet-100 text-violet-700 text-[9px] font-bold inline-flex items-center justify-center mr-1.5 shadow-2xs">${initial}</span>
+                      <span class="font-semibold text-xs">${escapeHtml(a.assignee_name || 'Unassigned')}</span>
+                    </div>
+                    ${a.assignee_email ? '<div class="text-[10px] text-slate-400 pl-6">' + escapeHtml(a.assignee_email) + '</div>' : ''}
+                  </td>
+                  <td class="px-4 py-3.5 text-slate-500 font-mono text-[11px] whitespace-nowrap">
+                    <i class="fa-regular fa-calendar text-slate-400 mr-1 text-[10px]"></i>${escapeHtml(a.due_date || 'TBD')}
+                  </td>
+                  <td class="px-4 py-3.5 whitespace-nowrap">
+                    <span class="px-2 py-0.5 rounded-lg font-bold text-[10px] border ${prioBadge}">${escapeHtml(a.priority)}</span>
+                  </td>
+                  <td class="px-4 py-3.5 text-right whitespace-nowrap">
+                    <button onclick="toggleActionStatus(${a.id}, '${a.status}')" class="px-2.5 py-1 rounded-lg text-[10px] font-bold border transition ${isCompleted ? 'border-emerald-300 bg-emerald-50 text-emerald-700' : 'border-slate-200 bg-white text-slate-700 hover:border-violet-300 shadow-2xs hover-lift'}">
+                      ${isCompleted ? '<i class="fa-solid fa-check mr-1 text-emerald-600"></i> Done' : 'Mark Done'}
+                    </button>
+                  </td>
+                `;
+                actionsEl.appendChild(tr);
+              });
+            }
+          });
+
+          // Topics
+          document.querySelectorAll('#detailTopicsList').forEach(topicsEl => {
+            topicsEl.innerHTML = '';
+            const topics = m.minutes.agenda_topics || [];
+            if (topics.length === 0) {
+              topicsEl.innerHTML = '<div class="text-xs text-slate-400 italic p-3 bg-slate-50 rounded-xl">No topic notes recorded.</div>';
+            } else {
+              topics.forEach(t => {
+                const div = document.createElement('div');
+                div.className = 'bg-slate-50 border border-slate-200/80 p-3.5 rounded-xl';
+                div.innerHTML = `
+                  <h4 class="font-bold text-slate-900 text-xs">${escapeHtml(t.topic)}</h4>
+                  <p class="text-xs text-slate-600 mt-1 leading-relaxed">${escapeHtml(t.summary)}</p>
+                `;
+                topicsEl.appendChild(div);
+              });
+            }
+          });
+
+          // Conversation Intelligence
+          renderConversationIntelligence(m.minutes, m.duration_seconds);
+
+          // Verbatim Transcript Rendering
+          currentTranscriptSegments = m.minutes.transcript || [];
+          renderTranscript(currentTranscriptSegments);
+
+          // Reset Fred Chat co-pilot
+          resetFredChat(m.title);
+        }
+
+        // Also sync to Notebook Workspace panel if notebook is active
+        const wsDetail = document.getElementById('workspaceDetailPanel');
+        const wsEmpty = document.getElementById('workspaceEmptyState');
+        if (wsDetail && wsEmpty) {
+          wsEmpty.classList.add('hidden');
+          wsDetail.classList.remove('hidden');
+          wsDetail.innerHTML = document.getElementById('liveDemoSection').querySelector('.bg-white').innerHTML;
+        }
+
+      } catch (err) {
+        showToast('Error loading meeting details: ' + err.message, true);
+      }
+    }
+
+    // Tab Navigation Switcher
+    function switchMeetingTab(tabName) {
+      currentMeetingTab = tabName;
+      const tabs = ['summary', 'actions', 'intelligence', 'askfred'];
+      tabs.forEach(t => {
+        const btns = document.querySelectorAll(`#tabBtn-${t}`);
+        const panes = document.querySelectorAll(`#tabPane-${t}`);
+        btns.forEach(btn => {
+          if (t === tabName) {
+            btn.className = 'meeting-tab-btn px-4 py-2 text-xs font-semibold rounded-xl transition-all duration-200 flex items-center gap-2 bg-white text-violet-700 shadow-xs border border-violet-100/60';
+          } else {
+            btn.className = 'meeting-tab-btn px-4 py-2 text-xs font-medium rounded-xl transition-all duration-200 flex items-center gap-2 text-slate-600 hover:text-slate-900 hover:bg-white/60 border border-transparent';
+          }
+        });
+        panes.forEach(pane => {
+          if (t === tabName) pane.classList.remove('hidden');
+          else pane.classList.add('hidden');
+        });
+      });
+    }
+
+    // Fireflies Audio Player Controller
+    let currentAudioDuration = 0;
+    let isAudioPlaying = false;
+    let currentPlaybackSpeed = 1.0;
+
+    function setupAudioPlayerEvents() {
+      const audio = document.getElementById('meetingAudioElement');
+      if (!audio) return;
+
+      audio.onloadedmetadata = () => {
+        const rawDur = audio.duration;
+        if (isFinite(rawDur) && rawDur > 0) {
+          currentAudioDuration = rawDur;
+        }
+        document.querySelectorAll('#playerTotalDuration').forEach(el => {
+          el.textContent = formatSecondsToTime(currentAudioDuration);
+        });
+      };
+
+      audio.ontimeupdate = () => {
+        const cur = audio.currentTime || 0;
+        const rawDur = audio.duration;
+        const dur = (isFinite(rawDur) && rawDur > 0) ? rawDur : (currentAudioDuration || 1);
+        document.querySelectorAll('#playerCurrentTime').forEach(el => {
+          el.textContent = formatSecondsToTime(cur);
+        });
+        const progress = dur > 0 ? (cur / dur) * 100 : 0;
+        document.querySelectorAll('#playerProgressBar').forEach(progressBar => {
+          if (progressBar && !progressBar.dataset.seeking) {
+            progressBar.value = (!isFinite(progress) || isNaN(progress)) ? 0 : progress;
+          }
+        });
+        highlightActiveTranscriptTurn(cur);
+      };
+
+      audio.onplay = () => {
+        isAudioPlaying = true;
+        updatePlayerPlayBtn(true);
+      };
+
+      audio.onpause = () => {
+        isAudioPlaying = false;
+        updatePlayerPlayBtn(false);
+      };
+
+      audio.onended = () => {
+        isAudioPlaying = false;
+        updatePlayerPlayBtn(false);
+      };
+    }
+
+    function updatePlayerPlayBtn(playing) {
+      document.querySelectorAll('#playerPlayPauseIcon').forEach(icon => {
+        icon.className = playing ? 'fa-solid fa-pause text-sm' : 'fa-solid fa-play text-sm ml-0.5';
+      });
+      document.querySelectorAll('#playerSoundwave').forEach(sw => {
+        if (playing) {
+          sw.classList.remove('hidden');
+          sw.classList.add('flex');
+        } else {
+          sw.classList.add('hidden');
+          sw.classList.remove('flex');
+        }
+      });
+    }
+
+    function toggleAudioPlayback() {
+      const audio = document.getElementById('meetingAudioElement');
+      if (!audio || !audio.src) return;
+      if (audio.paused) {
+        audio.play().catch(() => {});
+      } else {
+        audio.pause();
+      }
+    }
+
+    function skipAudio(seconds) {
+      const audio = document.getElementById('meetingAudioElement');
+      if (!audio) return;
+      audio.currentTime = Math.max(0, Math.min((audio.duration || 9999), audio.currentTime + seconds));
+    }
+
+    function handlePlayerSeek(val) {
+      const audio = document.getElementById('meetingAudioElement');
+      if (!audio || !audio.duration) return;
+      const seekTime = (parseFloat(val) / 100) * audio.duration;
+      audio.currentTime = seekTime;
+    }
+
+    function setPlaybackSpeed(speed) {
+      currentPlaybackSpeed = speed;
+      const audio = document.getElementById('meetingAudioElement');
+      if (audio) audio.playbackRate = speed;
+      document.querySelectorAll('.speed-btn').forEach(btn => {
+        const btnSpeed = parseFloat(btn.dataset.speed);
+        if (btnSpeed === speed) {
+          btn.className = 'speed-btn px-2 py-0.5 rounded text-[10px] font-bold text-purple-700 bg-white shadow-2xs transition';
+        } else {
+          btn.className = 'speed-btn px-2 py-0.5 rounded text-[10px] font-medium text-slate-600 hover:text-slate-900 transition';
+        }
+      });
+    }
+
+    function seekAudioTo(sec) {
+      const audio = document.getElementById('meetingAudioElement');
+      if (!audio) return;
+      audio.currentTime = sec;
+      audio.play().catch(() => {});
+    }
+
+    function formatSecondsToTime(seconds) {
+      if (!isFinite(seconds) || isNaN(seconds) || seconds < 0) return '00:00';
+      const m = Math.floor(seconds / 60);
+      const s = Math.floor(seconds % 60);
+      return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+    }
+
+    function parseSecondsFromTimestamp(ts) {
+      if (!ts) return 0;
+      const clean = ts.replace(/[\[\]]/g, '').trim();
+      const parts = clean.split(':').map(Number);
+      if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
+      if (parts.length === 2) return parts[0] * 60 + parts[1];
+      if (parts.length === 1 && !isNaN(parts[0])) return parts[0];
+      return 0;
+    }
+
+    function highlightActiveTranscriptTurn(currentSec) {
+      const items = document.querySelectorAll('.transcript-turn-item');
+      if (!items || items.length === 0) return;
+
+      let activeIndex = -1;
+      items.forEach((item, idx) => {
+        const segSec = parseFloat(item.dataset.sec || 0);
+        const nextItem = items[idx + 1];
+        const nextSec = nextItem ? parseFloat(nextItem.dataset.sec || 999999) : 999999;
+        if (currentSec >= segSec && currentSec < nextSec) {
+          activeIndex = idx;
+        }
+      });
+
+      items.forEach((item, idx) => {
+        if (idx === activeIndex) {
+          item.classList.add('border-l-4', 'border-violet-600', 'bg-violet-50/90', 'shadow-xs', 'ring-1', 'ring-violet-200');
+          item.classList.remove('border-transparent');
+        } else {
+          item.classList.remove('border-l-4', 'border-violet-600', 'bg-violet-50/90', 'shadow-xs', 'ring-1', 'ring-violet-200');
+          item.classList.add('border-transparent');
+        }
+      });
+    }
+
+    // Render Conversation Intelligence
+    function renderConversationIntelligence(minutes, durationSeconds = 0) {
+      document.querySelectorAll('#intelTotalDurationBadge').forEach(el => {
+        el.textContent = `${durationSeconds || 0}s duration`;
+      });
+
+      // Talk Time Distribution
+      const progressBars = document.querySelectorAll('#talkTimeProgressBar');
+      const speakersGrids = document.querySelectorAll('#talkTimeSpeakersGrid');
+      progressBars.forEach(b => b.innerHTML = '');
+      speakersGrids.forEach(g => g.innerHTML = '');
+
+      const colors = [
+        { bg: 'bg-purple-600', text: 'text-purple-700', border: 'border-purple-200', lightBg: 'bg-purple-50' },
+        { bg: 'bg-indigo-600', text: 'text-indigo-700', border: 'border-indigo-200', lightBg: 'bg-indigo-50' },
+        { bg: 'bg-emerald-600', text: 'text-emerald-700', border: 'border-emerald-200', lightBg: 'bg-emerald-50' },
+        { bg: 'bg-amber-500', text: 'text-amber-700', border: 'border-amber-200', lightBg: 'bg-amber-50' },
+        { bg: 'bg-rose-500', text: 'text-rose-700', border: 'border-rose-200', lightBg: 'bg-rose-50' }
+      ];
+
+      let talkTimes = minutes.speaker_talk_time || [];
+
+      if (talkTimes.length === 0 && minutes.transcript && minutes.transcript.length > 0) {
+        const speakerWords = {};
+        let totalWords = 0;
+        minutes.transcript.forEach(t => {
+          const spk = t.speaker || 'Host';
+          const words = (t.text || '').split(/\s+/).filter(Boolean).length;
+          speakerWords[spk] = (speakerWords[spk] || 0) + words;
+          totalWords += words;
+        });
+
+        talkTimes = Object.keys(speakerWords).map(spk => {
+          const words = speakerWords[spk];
+          const pct = totalWords > 0 ? Math.round((words / totalWords) * 100) : 100;
+          return { speaker: spk, percentage: pct, word_count: words };
+        });
+      }
+
+      if (talkTimes.length > 0) {
+        talkTimes.forEach((tt, idx) => {
+          const c = colors[idx % colors.length];
+          const widthPct = Math.max(5, tt.percentage);
+
+          progressBars.forEach(pb => {
+            const seg = document.createElement('div');
+            seg.className = `h-full ${c.bg} transition-all duration-500 hover:opacity-90`;
+            seg.style.width = `${widthPct}%`;
+            seg.title = `${escapeHtml(tt.speaker)}: ${tt.percentage}%`;
+            pb.appendChild(seg);
+          });
+
+          speakersGrids.forEach(sg => {
+            const card = document.createElement('div');
+            card.className = `p-3 rounded-xl border ${c.border} ${c.lightBg} space-y-2 shadow-2xs`;
+            card.innerHTML = `
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="w-6 h-6 rounded-full ${c.bg} text-white font-bold text-[10px] flex items-center justify-center">
+                    ${escapeHtml((tt.speaker || 'S').charAt(0).toUpperCase())}
+                  </span>
+                  <span class="font-bold text-xs text-slate-900 truncate max-w-[120px]">${escapeHtml(tt.speaker)}</span>
+                </div>
+                <span class="text-xs font-bold ${c.text}">${tt.percentage}%</span>
+              </div>
+              <div class="flex items-center justify-between text-[11px] text-slate-500">
+                <span>${tt.word_count || 0} words</span>
+                <span>${durationSeconds ? Math.round((durationSeconds * tt.percentage) / 100) + 's' : 'estimated'}</span>
+              </div>
+            `;
+            sg.appendChild(card);
+          });
+        });
+      }
+
+      // WPM Pacing
+      const wpm = minutes.words_per_minute || 130;
+      document.querySelectorAll('#wpmValue').forEach(el => el.textContent = wpm);
+      document.querySelectorAll('#wpmPaceBadge').forEach(badge => {
+        if (wpm < 110) {
+          badge.textContent = 'Deliberate / Slow';
+          badge.className = 'text-[10px] px-2 py-0.5 rounded-full font-bold bg-amber-50 text-amber-700 border border-amber-200';
+        } else if (wpm > 165) {
+          badge.textContent = 'Fast Cadence';
+          badge.className = 'text-[10px] px-2 py-0.5 rounded-full font-bold bg-purple-50 text-purple-700 border border-purple-200';
+        } else {
+          badge.textContent = 'Conversational / Natural';
+          badge.className = 'text-[10px] px-2 py-0.5 rounded-full font-bold bg-emerald-50 text-emerald-700 border border-emerald-200';
+        }
+      });
+
+      // Sentiment
+      const sentiment = minutes.sentiment_breakdown || { positive: 70, neutral: 25, negative: 5 };
+      const pos = sentiment.positive || 70;
+      const neu = sentiment.neutral || 25;
+      document.querySelectorAll('#sentimentPosVal').forEach(el => el.textContent = `${pos}%`);
+      document.querySelectorAll('#sentimentPosBar').forEach(el => el.style.width = `${pos}%`);
+      document.querySelectorAll('#sentimentNeuVal').forEach(el => el.textContent = `${neu}%`);
+      document.querySelectorAll('#sentimentNeuBar').forEach(el => el.style.width = `${neu}%`);
+      document.querySelectorAll('#intelSentimentLabel').forEach(el => el.textContent = minutes.overall_sentiment || 'Productive');
+
+      // Questions Asked
+      let questions = minutes.questions_asked || [];
+      if (questions.length === 0 && minutes.transcript) {
+        questions = minutes.transcript.filter(t => (t.text || '').includes('?')).map(t => `${t.speaker}: ${t.text}`);
+      }
+      document.querySelectorAll('#questionsCountBadge').forEach(el => el.textContent = questions.length);
+      document.querySelectorAll('#questionsAskedList').forEach(ql => {
+        ql.innerHTML = '';
+        if (questions.length === 0) {
+          ql.innerHTML = '<div class="text-slate-400 italic p-2 bg-slate-50 rounded-lg">No direct questions detected.</div>';
+        } else {
+          questions.forEach(q => {
+            const item = document.createElement('div');
+            item.className = 'p-2 bg-slate-50 rounded-lg border border-slate-200/80 flex items-start gap-2';
+            item.innerHTML = `<i class="fa-solid fa-question text-purple-600 text-[10px] mt-0.5"></i> <span>${escapeHtml(q)}</span>`;
+            ql.appendChild(item);
+          });
+        }
+      });
+
+      // Key Metrics
+      let metrics = minutes.key_metrics || [];
+      if (metrics.length === 0) {
+        metrics = [
+          `Total speech turns: ${(minutes.transcript || []).length}`,
+          `Participants identified: ${(minutes.participants || []).length}`,
+          `Action items assigned: ${(minutes.action_items || []).length}`
+        ];
+      }
+      document.querySelectorAll('#metricsCountBadge').forEach(el => el.textContent = metrics.length);
+      document.querySelectorAll('#keyMetricsList').forEach(ml => {
+        ml.innerHTML = '';
+        metrics.forEach(m => {
+          const item = document.createElement('div');
+          item.className = 'p-2 bg-slate-50 rounded-lg border border-slate-200/80 flex items-start gap-2';
+          item.innerHTML = `<i class="fa-solid fa-check text-amber-500 text-[10px] mt-0.5"></i> <span>${escapeHtml(m)}</span>`;
+          ml.appendChild(item);
+        });
+      });
+    }
+
+    // Ask Fred AI Chat Implementation
+    let fredChatHistory = [];
+    let isFredResponding = false;
+
+    function resetFredChat(title = '') {
+      fredChatHistory = [];
+      document.querySelectorAll('#fredChatLog').forEach(log => {
+        log.innerHTML = `
+          <div class="flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center shrink-0 text-sm">
+              <i class="fa-solid fa-robot"></i>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-2xl rounded-tl-sm p-3.5 max-w-xl text-xs text-slate-800 leading-relaxed shadow-xs">
+              <p class="font-bold text-purple-700 mb-1">Aura</p>
+              <p>Hi! I'm Aura, your AI Meeting Co-Pilot. I'm ready to answer any questions about <strong>${escapeHtml(title || 'this meeting')}</strong>. Ask for action item breakdowns, specific speaker statements, or custom recap emails!</p>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function clearFredChatHistory() {
+      const title = document.getElementById('previewTitle').textContent;
+      resetFredChat(title);
+      showToast('Aura chat reset.');
+    }
+
+    function sendFredPrompt(promptText) {
+      document.querySelectorAll('#fredChatInput').forEach(inp => inp.value = promptText);
+      handleFredChatSubmit();
+    }
+
+    async function handleFredChatSubmit(e) {
+      if (e) e.preventDefault();
+      if (isFredResponding || !currentSelectedMeetingId) return;
+
+      const input = document.getElementById('fredChatInput');
+      const question = input.value.trim();
+      if (!question) return;
+
+      input.value = '';
+      isFredResponding = true;
+      const sendBtns = document.querySelectorAll('#fredChatSendBtn');
+      sendBtns.forEach(btn => {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+      });
+
+      appendFredUserBubble(question);
+
+      const loadingId = 'fred-loading-' + Date.now();
+      appendFredLoadingBubble(loadingId);
+
+      try {
+        const res = await fetch(`/api/v1/meetings/${currentSelectedMeetingId}/chat`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ question: question, history: fredChatHistory })
+        });
+
+        const data = await res.json();
+        removeFredElement(loadingId);
+
+        if (res.ok) {
+          appendFredAssistantBubble(data.answer, data.suggested_followups || []);
+          fredChatHistory.push({ role: 'user', content: question });
+          fredChatHistory.push({ role: 'assistant', content: data.answer });
+        } else {
+          appendFredAssistantBubble('⚠️ ' + (data.detail || 'Could not process question with Aura.'));
+        }
+      } catch (err) {
+        removeFredElement(loadingId);
+        appendFredAssistantBubble('⚠️ Error connecting to Aura: ' + err.message);
+      } finally {
+        isFredResponding = false;
+        sendBtns.forEach(btn => {
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> <span>Ask</span>';
+        });
+      }
+    }
+
+    function appendFredUserBubble(text) {
+      document.querySelectorAll('#fredChatLog').forEach(log => {
+        const div = document.createElement('div');
+        div.className = 'flex items-start justify-end gap-3';
+        div.innerHTML = `
+          <div class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-2xl rounded-tr-sm p-3.5 max-w-xl text-xs leading-relaxed shadow-xs">
+            <p class="font-bold text-purple-200 text-[11px] mb-0.5">You</p>
+            <p>${escapeHtml(text)}</p>
+          </div>
+          <div class="w-8 h-8 rounded-lg bg-slate-200 text-slate-700 flex items-center justify-center shrink-0 text-xs">
+            <i class="fa-solid fa-user"></i>
+          </div>
+        `;
+        log.appendChild(div);
+        log.scrollTop = log.scrollHeight;
+      });
+    }
+
+    function appendFredLoadingBubble(id) {
+      document.querySelectorAll('#fredChatLog').forEach(log => {
+        const div = document.createElement('div');
+        div.id = id;
+        div.className = 'flex items-start gap-3';
+        div.innerHTML = `
+          <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-violet-600 to-indigo-600 text-white flex items-center justify-center shrink-0 text-sm shadow-xs">
+            <i class="fa-solid fa-wand-magic-sparkles text-xs"></i>
+          </div>
+          <div class="bg-white border border-slate-200/90 rounded-2xl rounded-tl-sm p-3 max-w-xl text-xs text-slate-600 flex items-center gap-2 shadow-2xs">
+            <i class="fa-solid fa-spinner fa-spin text-violet-600"></i>
+            <span>Aura is analyzing transcript & minutes...</span>
+          </div>
+        `;
+        log.appendChild(div);
+        log.scrollTop = log.scrollHeight;
+      });
+    }
+
+    function appendFredAssistantBubble(markdownText, followups = []) {
+      document.querySelectorAll('#fredChatLog').forEach(log => {
+        const div = document.createElement('div');
+        div.className = 'flex items-start gap-3';
+
+        const formattedHtml = formatMarkdownToHtml(markdownText);
+
+        let followupsHtml = '';
+        if (followups && followups.length > 0) {
+          const chips = followups.map(f => `
+            <button onclick="sendFredPrompt('${escapeHtml(f.replace(/'/g, "\\'"))}')" class="text-[11px] bg-violet-50 hover:bg-violet-100 text-violet-800 px-2.5 py-1 rounded-full border border-violet-200 transition text-left flex items-center gap-1.5 shadow-2xs">
+              <i class="fa-solid fa-wand-magic-sparkles text-amber-500 text-[9px]"></i>
+              <span>${escapeHtml(f)}</span>
+            </button>
+          `).join('');
+
+          followupsHtml = `
+            <div class="mt-3 pt-2.5 border-t border-slate-100">
+              <p class="text-[10px] text-slate-500 uppercase font-bold mb-1.5 tracking-wider">Suggested Follow-ups:</p>
+              <div class="flex flex-wrap gap-1.5">${chips}</div>
+            </div>
+          `;
+        }
+
+        div.innerHTML = `
+          <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-violet-600 to-indigo-600 text-white flex items-center justify-center shrink-0 text-sm shadow-xs">
+            <i class="fa-solid fa-wand-magic-sparkles text-xs"></i>
+          </div>
+          <div class="bg-white border border-slate-200/90 rounded-2xl rounded-tl-sm p-3.5 max-w-xl text-xs text-slate-800 leading-relaxed shadow-xs">
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-bold text-violet-700 flex items-center gap-1.5"><i class="fa-solid fa-wand-magic-sparkles text-xs"></i> Aura</span>
+              <button onclick="copyToClipboard(this, \`${escapeHtml(markdownText).replace(/`/g, '\\`')}\`)" class="text-[10px] text-slate-400 hover:text-slate-600 transition flex items-center gap-1">
+                <i class="fa-solid fa-copy"></i> Copy
+              </button>
+            </div>
+            <div class="space-y-1.5">${formattedHtml}</div>
+            ${followupsHtml}
+          </div>
+        `;
+        log.appendChild(div);
+        log.scrollTop = log.scrollHeight;
+      });
+    }
+
+    function removeFredElement(id) {
+      document.querySelectorAll('#' + id).forEach(el => el.remove());
+    }
+
+    function formatMarkdownToHtml(md) {
+      if (!md) return '';
+      let html = escapeHtml(md);
+      html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+      const lines = html.split('\n');
+      let output = [];
+      let inList = false;
+
+      lines.forEach(line => {
+        const trimmed = line.trim();
+        if (trimmed.startsWith('* ') || trimmed.startsWith('- ')) {
+          if (!inList) { output.push('<ul class="list-disc pl-4 space-y-1 my-1">'); inList = true; }
+          output.push(`<li>${trimmed.substring(2)}</li>`);
+        } else if (trimmed.match(/^\d+\.\s/)) {
+          if (!inList) { output.push('<ol class="list-decimal pl-4 space-y-1 my-1">'); inList = true; }
+          output.push(`<li>${trimmed.replace(/^\d+\.\s/, '')}</li>`);
+        } else {
+          if (inList) { output.push('</ul>'); inList = false; }
+          if (trimmed) {
+            output.push(`<p class="my-1">${trimmed}</p>`);
+          }
+        }
+      });
+      if (inList) output.push('</ul>');
+      return output.join('');
+    }
+
+    function copyToClipboard(btn, text) {
+      navigator.clipboard.writeText(text);
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-check text-emerald-600"></i> Copied';
+      setTimeout(() => { btn.innerHTML = orig; }, 2000);
+    }
+
+    // Transcript Filtering & Rendering
+    function setTranscriptFilter(filterName) {
+      currentTranscriptFilter = filterName;
+      const chips = ['all', 'actions', 'questions', 'decisions'];
+      chips.forEach(c => {
+        document.querySelectorAll(`#filterChip-${c}`).forEach(btn => {
+          if (c === filterName) {
+            btn.className = 'transcript-filter-chip px-2 py-0.5 rounded font-bold text-purple-700 bg-white shadow-2xs transition';
+          } else {
+            btn.className = 'transcript-filter-chip px-2 py-0.5 rounded text-slate-600 hover:text-slate-900 transition';
+          }
+        });
+      });
+      filterTranscript();
+    }
+
+    function renderTranscript(segments) {
+      const lists = document.querySelectorAll('#detailTranscriptList');
+      lists.forEach(el => el.innerHTML = '');
+
+      document.querySelectorAll('#transcriptCountBadge').forEach(el => {
+        el.textContent = `${segments ? segments.length : 0} turns`;
+      });
+
+      if (!segments || segments.length === 0) {
+        lists.forEach(el => {
+          el.innerHTML = '<div class="text-xs text-slate-400 py-6 text-center italic">No speech transcript segments recorded for this session.</div>';
+        });
+        return;
+      }
+
+      // Populate speaker filter
+      document.querySelectorAll('#transcriptSpeakerFilter').forEach(speakerSelect => {
+        const existingSpeakers = new Set(currentTranscriptSegments.map(s => s.speaker || 'Speaker'));
+        const curVal = speakerSelect.value;
+        speakerSelect.innerHTML = '<option value="all">All Speakers</option>';
+        existingSpeakers.forEach(spk => {
+          const opt = document.createElement('option');
+          opt.value = spk;
+          opt.textContent = spk;
+          speakerSelect.appendChild(opt);
+        });
+        if (existingSpeakers.has(curVal)) speakerSelect.value = curVal;
+      });
+
+      segments.forEach((seg, index) => {
+        const sec = parseSecondsFromTimestamp(seg.timestamp);
+        const isSpeakerA = index % 2 === 0;
+        const speakerInitial = (seg.speaker || 'S').charAt(0).toUpperCase();
+        const avatarBg = isSpeakerA ? 'bg-gradient-to-tr from-violet-600 to-purple-600 text-white' : 'bg-gradient-to-tr from-indigo-600 to-sky-600 text-white';
+        const badgeColor = isSpeakerA ? 'bg-violet-50 text-violet-700 border-violet-200/80' : 'bg-indigo-50 text-indigo-700 border-indigo-200/80';
+
+        let tagPill = '';
+        const textLower = (seg.text || '').toLowerCase();
+        if (textLower.includes('?') || textLower.includes('how') || textLower.includes('what') || textLower.includes('why')) {
+          tagPill = '<span class="text-[9px] px-1.5 py-0.2 rounded bg-indigo-50 text-indigo-700 border border-indigo-200 font-semibold">❓ Question</span>';
+        } else if (textLower.includes('will') || textLower.includes('action') || textLower.includes('send') || textLower.includes('handle')) {
+          tagPill = '<span class="text-[9px] px-1.5 py-0.2 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 font-semibold">🎯 Action</span>';
+        }
+
+        lists.forEach(el => {
+          const item = document.createElement('div');
+          item.dataset.sec = sec;
+          item.className = 'transcript-turn-item group flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-100/80 transition-all border border-transparent hover:border-slate-200 text-xs cursor-pointer';
+          item.onclick = () => seekAudioTo(sec);
+
+          item.innerHTML = `
+            <div class="flex items-center gap-2 shrink-0">
+              <span class="w-6 h-6 rounded-full ${avatarBg} font-bold text-[10px] flex items-center justify-center shrink-0 shadow-2xs">${speakerInitial}</span>
+              <button onclick="event.stopPropagation(); seekAudioTo(${sec})" title="Jump playback here" class="text-[10px] font-mono text-slate-500 group-hover:text-violet-700 bg-white group-hover:bg-violet-50 px-1.5 py-0.5 rounded-lg border border-slate-200 flex items-center gap-1 transition shadow-2xs">
+                <i class="fa-solid fa-play text-[8px] opacity-0 group-hover:opacity-100 transition text-violet-600"></i>
+                <span>${escapeHtml(seg.timestamp || '[00:00]')}</span>
+              </button>
+              <span class="font-bold px-2 py-0.5 rounded-lg text-[10px] border ${badgeColor}">${escapeHtml(seg.speaker || 'Speaker')}</span>
+              ${tagPill}
+            </div>
+            <p class="text-slate-800 leading-relaxed font-normal flex-1 pt-0.5">${escapeHtml(seg.text || '')}</p>
+          `;
+          el.appendChild(item);
+        });
+      });
+    }
+
+    function filterTranscript() {
+      const q = (document.getElementById('transcriptSearchInput') ? document.getElementById('transcriptSearchInput').value : '').toLowerCase().trim();
+      const speakerSelect = document.getElementById('transcriptSpeakerFilter');
+      const selectedSpeaker = speakerSelect ? speakerSelect.value : 'all';
+
+      let filtered = currentTranscriptSegments;
+
+      if (selectedSpeaker && selectedSpeaker !== 'all') {
+        filtered = filtered.filter(s => (s.speaker || '').toLowerCase() === selectedSpeaker.toLowerCase());
+      }
+
+      if (currentTranscriptFilter === 'questions') {
+        filtered = filtered.filter(s => (s.text || '').includes('?'));
+      } else if (currentTranscriptFilter === 'actions') {
+        filtered = filtered.filter(s => {
+          const t = (s.text || '').toLowerCase();
+          return t.includes('will') || t.includes('handle') || t.includes('take') || t.includes('assign') || t.includes('action');
+        });
+      } else if (currentTranscriptFilter === 'decisions') {
+        filtered = filtered.filter(s => {
+          const t = (s.text || '').toLowerCase();
+          return t.includes('agree') || t.includes('decide') || t.includes('approved') || t.includes('confirm') || t.includes('conclude');
+        });
+      }
+
+      if (q) {
+        filtered = filtered.filter(s =>
+          (s.text && s.text.toLowerCase().includes(q)) ||
+          (s.speaker && s.speaker.toLowerCase().includes(q))
+        );
+      }
+
+      renderTranscript(filtered);
+    }
+
+    async function copyFullTranscript() {
+      if (!currentTranscriptSegments || currentTranscriptSegments.length === 0) return;
+      const lines = currentTranscriptSegments.map(s => (s.timestamp || '') + ' ' + (s.speaker || 'Speaker') + ': ' + (s.text || ''));
+      await navigator.clipboard.writeText(lines.join('\n'));
+
+      document.querySelectorAll('#copyTranscriptBtn').forEach(btn => {
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<i class="fa-solid fa-check text-emerald-600"></i> Copied!';
+        setTimeout(() => { btn.innerHTML = orig; }, 2000);
+      });
+      showToast('Transcript copied to clipboard!');
+    }
+
+    async function toggleActionStatus(actionId, currentStatus) {
+      const nextStatus = currentStatus === 'Completed' ? 'Pending' : 'Completed';
+      try {
+        await fetch(`/api/v1/actions/${actionId}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: nextStatus })
+        });
+        if (currentSelectedMeetingId) selectMeeting(currentSelectedMeetingId);
+        showToast(`Action item marked ${nextStatus}`);
+      } catch (e) {
+        showToast('Failed to update action item: ' + e.message, true);
+      }
+    }
+
+    async function reprocessCurrentMeeting() {
+      if (!currentSelectedMeetingId) return;
+      const btns = document.querySelectorAll('#previewReprocessBtn');
+      btns.forEach(b => {
+        b.disabled = true;
+        b.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing with Gemini...';
+      });
+
+      try {
+        const res = await fetch(`/api/v1/meetings/${currentSelectedMeetingId}/reprocess`, { method: 'POST' });
+        const data = await res.json();
+        if (res.ok) {
+          showToast('Meeting re-processed successfully with Gemini 2.5 Flash!');
+          selectMeeting(currentSelectedMeetingId);
+          loadMeetings(true);
+        } else {
+          showToast(data.detail || 'Re-processing failed', true);
+        }
+      } catch (e) {
+        showToast('Re-processing error: ' + e.message, true);
+      } finally {
+        btns.forEach(b => {
+          b.disabled = false;
+          b.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> Re-process with Gemini';
+        });
+      }
+    }
+
+    async function resendCurrentEmail() {
+      if (!currentSelectedMeetingId) return;
+      const btns = document.querySelectorAll('#previewEmailBtn');
+      btns.forEach(b => {
+        b.disabled = true;
+        b.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+      });
+
+      try {
+        const res = await fetch(`/api/v1/meetings/${currentSelectedMeetingId}/email`, { method: 'POST' });
+        const data = await res.json();
+        showToast(data.sent ? 'Recap email dispatched successfully!' : 'Email queued / SMTP host check completed.');
+      } catch (e) {
+        showToast('Email error: ' + e.message, true);
+      } finally {
+        btns.forEach(b => {
+          b.disabled = false;
+          b.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Email';
+        });
+      }
+    }
+
+    async function handleAudioUpload(e) {
+      e.preventDefault();
+      const btn = document.getElementById('uploadSubmitBtn');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing with Gemini...';
+
+      const title = document.getElementById('uploadTitle').value;
+      const rawParticipants = document.getElementById('uploadParticipants').value;
+      const audioFile = document.getElementById('uploadAudioFile').files[0];
+      const autoEmail = document.getElementById('uploadAutoEmail').checked;
+
+      const participants = rawParticipants.split(',').filter(x => x.trim()).map(x => {
+        const match = x.match(/(.*)\((.*)\)/);
+        if (match) return { name: match[1].trim(), email: match[2].trim(), role: 'attendee' };
+        return { name: x.trim(), email: null, role: 'attendee' };
+      });
+
+      const formData = new FormData();
+      formData.append('audio_file', audioFile);
+      formData.append('meeting_title', title);
+      formData.append('participants_json', JSON.stringify(participants));
+      formData.append('source', 'manual_upload');
+      formData.append('auto_email', autoEmail ? 'true' : 'false');
+
+      try {
+        const res = await fetch('/api/v1/meetings/recordings', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+        document.getElementById('uploadModal').classList.add('hidden');
+        showToast('Meeting processed successfully!');
+        await loadMeetings(true);
+        selectMeeting(data.meeting_id);
+      } catch (err) {
+        showToast('Upload failed: ' + err.message, true);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<span>Process with Gemini</span>';
+      }
+    }
+
+    // Delete Meeting Handlers
+    let meetingIdToDelete = null;
+    let isDeletingAll = false;
+
+    function promptDeleteMeeting(id, title) {
+      meetingIdToDelete = parseInt(id);
+      isDeletingAll = false;
+      const modal = document.getElementById('deleteModal');
+      const modalText = document.getElementById('deleteModalText');
+      modalText.innerHTML = `Are you sure you want to permanently delete <strong>${escapeHtml(title) || 'Meeting #' + id}</strong>?<br><span class="text-[11px] text-slate-500 mt-1 block">This will remove the audio recording, transcript, action items, and PDF report.</span>`;
+      document.getElementById('confirmDeleteBtn').innerHTML = '<i class="fa-solid fa-trash-can"></i> Yes, Delete Meeting';
+      modal.classList.remove('hidden');
+    }
+
+    function promptDeleteAllMeetings() {
+      if (allMeetings.length === 0) {
+        showToast('No meetings to delete.');
+        return;
+      }
+      isDeletingAll = true;
+      meetingIdToDelete = null;
+      const modalText = document.getElementById('deleteModalText');
+      modalText.innerHTML = `Are you sure you want to delete <strong>ALL ${allMeetings.length} meetings</strong>?<br><span class="text-[11px] text-red-600 mt-1 block">All recorded audio files, transcripts, action items, and PDF reports will be permanently deleted.</span>`;
+      document.getElementById('confirmDeleteBtn').innerHTML = '<i class="fa-solid fa-trash-can"></i> Yes, Delete ALL Meetings';
+      document.getElementById('deleteModal').classList.remove('hidden');
+    }
+
+    function closeDeleteModal() {
+      const modal = document.getElementById('deleteModal');
+      if (modal) modal.classList.add('hidden');
+      meetingIdToDelete = null;
+      isDeletingAll = false;
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeDeleteModal();
+    });
+
+    async function executeDeleteMeeting() {
+      const btn = document.getElementById('confirmDeleteBtn');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Deleting...';
+
+      try {
+        if (isDeletingAll) {
+          const res = await fetch('/api/v1/meetings', { method: 'DELETE' });
+          const data = await res.json();
+          if (res.ok) {
+            showToast('All meetings deleted successfully');
+            closeDeleteModal();
+            currentSelectedMeetingId = null;
+            await loadMeetings(true);
+          } else {
+            showToast(data.detail || 'Failed to delete all meetings', true);
+          }
+        } else if (meetingIdToDelete) {
+          const id = meetingIdToDelete;
+          const res = await fetch(`/api/v1/meetings/${id}`, { method: 'DELETE' });
+          const data = await res.json();
+          if (res.ok) {
+            showToast('Meeting deleted successfully');
+            closeDeleteModal();
+            if (parseInt(currentSelectedMeetingId) === parseInt(id)) {
+              currentSelectedMeetingId = null;
+            }
+            await loadMeetings(true);
+          } else {
+            showToast(data.detail || 'Failed to delete meeting', true);
+          }
+        }
+      } catch (err) {
+        showToast('Delete error: ' + err.message, true);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-trash-can"></i> Yes, Delete Meeting';
+      }
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // URL Query parameters / Hash check
+    if (window.location.hash === '#notebook' || window.location.hash === '#app') {
+      switchMainView('notebook');
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialId = urlParams.get('meeting_id') || urlParams.get('id');
+    if (initialId) {
+      currentSelectedMeetingId = parseInt(initialId);
+    }
+
+    // =========================================================================
+    // SPOTLIGHT AURA DEMO CONTROLLER
+    // =========================================================================
+    const spotlightDemos = {
+      email: {
+        question: "Draft a concise follow-up email recap for attendees.",
+        html: `
+          <p class="font-bold text-violet-900 mb-1 text-xs">Subject: Recap & Next Steps: Product Strategy Sync</p>
+          <p class="mb-1.5 text-xs text-slate-700">Hi team, thanks for joining today's roadmap review. Here is a summary of our decisions:</p>
+          <ul class="list-disc pl-4 space-y-1 my-1 text-slate-600 text-xs">
+            <li><strong>Roadmap Confirmed:</strong> AI engine architecture validated <span class="text-[10px] bg-violet-50 text-violet-700 font-mono px-1 rounded border border-violet-200">[00:00:06]</span>.</li>
+            <li><strong>Backend Docs:</strong> API documentation will be shared by Friday <span class="text-[10px] bg-violet-50 text-violet-700 font-mono px-1 rounded border border-violet-200">[00:00:12]</span>.</li>
+            <li><strong>Audio Testing:</strong> Zira validating Meet and Teams capture pipeline <span class="text-[10px] bg-violet-50 text-violet-700 font-mono px-1 rounded border border-violet-200">[00:00:17]</span>.</li>
+          </ul>
+          <p class="text-[11px] text-slate-500 italic pt-1">Next progress checkpoint: Friday at 10:00 AM.</p>
+        `
+      },
+      actions: {
+        question: "What are the deliverables & accountable owners?",
+        html: `
+          <p class="font-bold text-slate-900 mb-1.5 text-xs">Action Items & Accountable Deliverables:</p>
+          <div class="space-y-1.5">
+            <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-slate-900 text-xs">Finalize backend API docs</span>
+                <span class="text-rose-700 font-bold text-[9px] bg-rose-50 px-1.5 py-0.2 rounded border border-rose-200">Urgent</span>
+              </div>
+              <p class="text-[11px] text-slate-500 mt-0.5">Owner: <strong>David Miller (Host)</strong> • Due: <strong>Friday</strong></p>
+            </div>
+            <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-slate-900 text-xs">Verify audio capture across Meet & Teams</span>
+                <span class="text-indigo-700 font-bold text-[9px] bg-indigo-50 px-1.5 py-0.2 rounded border border-indigo-200">High</span>
+              </div>
+              <p class="text-[11px] text-slate-500 mt-0.5">Owner: <strong>Zira Chen (Attendee)</strong> • Due: <strong>Monday</strong></p>
+            </div>
+          </div>
+        `
+      },
+      unresolved: {
+        question: "What questions were left open or unresolved?",
+        html: `
+          <p class="font-bold text-slate-900 mb-1 text-xs">Unresolved Questions & Follow-ups:</p>
+          <div class="p-2.5 rounded-lg bg-amber-50/70 border border-amber-200 text-amber-900 space-y-1">
+            <p class="font-semibold text-xs flex items-center gap-1.5"><i class="fa-solid fa-circle-question text-amber-600"></i> Telephony IVR SIP Stream Latency</p>
+            <p class="text-[11px] text-slate-600">The team aligned on Chrome browser capture, but live telephone SIP trunk testing was tabled for the upcoming Sprint 43 sync.</p>
+          </div>
+        `
+      }
+    };
+
+    function demoSpotlightAura(type) {
+      const data = spotlightDemos[type] || spotlightDemos.email;
+      const userText = document.getElementById('spotlightUserText');
+      const responseEl = document.getElementById('spotlightAuraResponse');
+      if (userText) userText.textContent = data.question;
+      if (responseEl) {
+        responseEl.innerHTML = '<div class="flex items-center gap-2 text-violet-600 py-3"><i class="fa-solid fa-spinner fa-spin"></i><span>Aura is reasoning over verbatim dialogue...</span></div>';
+        setTimeout(() => {
+          responseEl.innerHTML = data.html;
+        }, 250);
+      }
+      const types = ['email', 'actions', 'unresolved'];
+      types.forEach(t => {
+        const btn = document.getElementById(`spotlightBtn-${t}`);
+        if (btn) {
+          if (t === type) {
+            btn.className = 'spotlight-prompt-btn p-3 rounded-xl border border-violet-200 bg-violet-50/70 text-violet-900 text-xs font-semibold flex items-center justify-between text-left transition shadow-2xs';
+            const arrow = btn.querySelector('.fa-arrow-right');
+            if (arrow) arrow.className = 'fa-solid fa-arrow-right text-[10px] text-violet-600';
+          } else {
+            btn.className = 'spotlight-prompt-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-700 text-xs font-medium flex items-center justify-between text-left transition hover:bg-slate-50 shadow-2xs';
+            const arrow = btn.querySelector('.fa-arrow-right');
+            if (arrow) arrow.className = 'fa-solid fa-arrow-right text-[10px] text-slate-400';
+          }
+        }
+      });
+    }
+
+    // =========================================================================
+    // ROI CALCULATOR CONTROLLER
+    // =========================================================================
+    function updateRoiCalc() {
+      const teamSlider = document.getElementById('roiTeamSlider');
+      const meetingsSlider = document.getElementById('roiMeetingsSlider');
+      if (!teamSlider || !meetingsSlider) return;
+
+      const team = parseInt(teamSlider.value) || 10;
+      const meetings = parseInt(meetingsSlider.value) || 8;
+
+      const teamValEl = document.getElementById('roiTeamVal');
+      const meetingsValEl = document.getElementById('roiMeetingsVal');
+      if (teamValEl) teamValEl.textContent = `${team} ${team === 1 ? 'person' : 'people'}`;
+      if (meetingsValEl) meetingsValEl.textContent = `${meetings} ${meetings === 1 ? 'meeting' : 'meetings'}`;
+
+      const monthlyMeetings = team * meetings * 4;
+      const hoursSaved = Math.round(monthlyMeetings * 0.75); // 45 mins saved per meeting
+      const costSaved = Math.round(hoursSaved * 45); // $45/hr average wage
+      const efficiency = Math.min(88, Math.round(52 + (meetings * 1.2)));
+      const feesAvoided = team * 240; // $20/mo * 12 mo = $240/yr/user vs Fireflies Pro
+
+      const hoursEl = document.getElementById('roiHoursSaved');
+      const costEl = document.getElementById('roiCostSaved');
+      const effEl = document.getElementById('roiEfficiency');
+      const feesEl = document.getElementById('roiFeesAvoided');
+
+      if (hoursEl) hoursEl.textContent = `${hoursSaved.toLocaleString()} hrs`;
+      if (costEl) costEl.textContent = `$${costSaved.toLocaleString()}`;
+      if (effEl) effEl.textContent = `+${efficiency}% Faster`;
+      if (feesEl) feesEl.textContent = `$${feesAvoided.toLocaleString()} / yr`;
+    }
+
+    // =========================================================================
+    // FAQ ACCORDION CONTROLLER
+    // =========================================================================
+    function toggleFaq(index) {
+      const content = document.getElementById(`faqAnswer-${index}`);
+      const icon = document.getElementById(`faqIcon-${index}`);
+      if (!content || !icon) return;
+      const isHidden = content.classList.contains('hidden');
+      if (isHidden) {
+        content.classList.remove('hidden');
+        icon.className = 'fa-solid fa-chevron-up text-violet-600 text-xs transition-transform';
+      } else {
+        content.classList.add('hidden');
+        icon.className = 'fa-solid fa-chevron-down text-slate-400 text-xs transition-transform';
+      }
+    }
+
+    // Initialize
+    checkSettings();
+    setupAudioPlayerEvents();
+    loadMeetings(true);
+    updateRoiCalc();
+
+    // Auto-refresh meetings every 5 seconds
+    setInterval(() => {
+      loadMeetings(false);
+    }, 5000);
+  </script>
+</body>
+</html>

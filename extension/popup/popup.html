@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MeetFlow AI — Meeting Intelligence & Notes</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="card">
+    
+    <!-- Brand Header -->
+    <header class="header">
+      <div class="logo-box">
+        <div class="logo-icon-wrap">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <div class="logo-text-group">
+          <div class="logo-title-row">
+            <span class="logo-title">MeetFlow AI</span>
+            <span class="logo-edition-badge">Aura Copilot</span>
+          </div>
+          <span class="logo-subtitle">Universal Meeting Intelligence</span>
+        </div>
+      </div>
+      <div id="statusBadge" class="badge badge-idle">
+        <span class="status-dot"></span>
+        <span class="status-text">Ready</span>
+      </div>
+    </header>
+
+    <!-- Platform Detection Status Strip -->
+    <div id="platformStrip" class="platform-strip">
+      <div class="platform-pill" id="platformPill">
+        <span class="platform-indicator-dot"></span>
+        <span id="platformLabel">Detecting meeting tab...</span>
+      </div>
+      <span class="tab-audio-tag">Dual Channel (Tab + Mic)</span>
+    </div>
+
+    <!-- Interactive Live Microphone VU Meter / Mic Check -->
+    <div class="mic-monitor-bar" id="micMonitorBar">
+      <div class="mic-monitor-left">
+        <button type="button" id="micTestBtn" class="btn-mic-test" title="Click to test your microphone levels">
+          <span class="mic-test-icon" id="micTestIcon">🎙️</span>
+          <span id="micTestText">Live Mic Check</span>
+        </button>
+        <div class="vu-meter" id="vuMeter">
+          <span class="vu-bar bar-v1"></span>
+          <span class="vu-bar bar-v2"></span>
+          <span class="vu-bar bar-v3"></span>
+          <span class="vu-bar bar-v4"></span>
+          <span class="vu-bar bar-v5"></span>
+          <span class="vu-bar bar-v6"></span>
+          <span class="vu-bar bar-v7"></span>
+        </div>
+      </div>
+      <span class="mic-quality-tag" id="micQualityTag">Click to test levels</span>
+    </div>
+
+    <!-- Active Recording Hero Banner (Animated Soundwave, Digital Timer & Live Bookmarks) -->
+    <div id="timerContainer" class="timer-card hidden">
+      <div class="timer-card-top">
+        <div class="timer-rec-indicator">
+          <span class="rec-ping-ring"></span>
+          <span class="rec-ping-dot"></span>
+          <span class="rec-status-label">RECORDING ACTIVE</span>
+        </div>
+        <div id="recordingTimer" class="timer-digits">00:00</div>
+      </div>
+      
+      <div class="timer-wave-bar">
+        <div class="sound-wave">
+          <span class="bar bar-1"></span>
+          <span class="bar bar-2"></span>
+          <span class="bar bar-3"></span>
+          <span class="bar bar-4"></span>
+          <span class="bar bar-5"></span>
+          <span class="bar bar-6"></span>
+          <span class="bar bar-7"></span>
+          <span class="bar bar-8"></span>
+          <span class="bar bar-9"></span>
+        </div>
+        <span class="stream-note">Capturing Tab Audio & Host Mic</span>
+      </div>
+
+      <!-- Interactive In-Call Timestamp Bookmarks -->
+      <div class="bookmark-panel">
+        <div class="bookmark-header">
+          <span class="bookmark-title">📌 Tap to Bookmark Moments</span>
+          <span class="bookmark-count" id="bookmarkCount">0 tagged</span>
+        </div>
+        <div class="bookmark-buttons">
+          <button type="button" class="btn-bookmark" data-type="Decision" data-icon="⭐">
+            <span>⭐</span> Decision
+          </button>
+          <button type="button" class="btn-bookmark" data-type="Action" data-icon="📌">
+            <span>📌</span> Action
+          </button>
+          <button type="button" class="btn-bookmark" data-type="Blocker" data-icon="🔥">
+            <span>🔥</span> Blocker
+          </button>
+          <button type="button" class="btn-bookmark" data-type="Idea" data-icon="💡">
+            <span>💡</span> Idea
+          </button>
+        </div>
+        <div id="liveBookmarksList" class="live-bookmarks-feed"></div>
+      </div>
+    </div>
+
+    <!-- Meeting Title Section -->
+    <div class="section" id="titleSection">
+      <div class="flex-between">
+        <label class="label" for="meetingTitleInput">Meeting Title</label>
+        <span class="label-hint">Synced from calendar / tab</span>
+      </div>
+      <div class="input-icon-wrap">
+        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+        </svg>
+        <input type="text" id="meetingTitleInput" class="input input-with-icon" placeholder="e.g. Product Strategy & Architecture Sync">
+      </div>
+      
+      <!-- Quick Template Chips -->
+      <div class="template-chips">
+        <button type="button" class="chip" data-title="Product Strategy Sync">Product Sync</button>
+        <button type="button" class="chip" data-title="Weekly Team Standup">Team Standup</button>
+        <button type="button" class="chip" data-title="1:1 Catch-up & Review">1:1 Catch-up</button>
+        <button type="button" class="chip" data-title="Sprint Planning & Review">Sprint Plan</button>
+      </div>
+    </div>
+
+    <!-- Interactive Ask Aura Pre-Meeting Helper (Collapsible) -->
+    <details class="section aura-prep-details">
+      <summary class="aura-prep-summary">
+        <div class="flex-align-center gap-1.5">
+          <span class="aura-sparkle-dot">✨</span>
+          <span>Ask Aura Pre-Meeting Helper</span>
+        </div>
+        <span class="aura-pill">Interactive Ideas</span>
+      </summary>
+      <div class="aura-prep-content">
+        <div class="aura-actions-row">
+          <button type="button" class="btn-aura-prep" id="prepAgendaBtn">📋 Insert 15m Agenda</button>
+          <button type="button" class="btn-aura-prep" id="prepIcebreakerBtn">🎲 Random Icebreaker</button>
+        </div>
+        <div id="auraPrepOutput" class="aura-output-box hidden"></div>
+      </div>
+    </details>
+
+    <!-- Attendees & Recipients Section -->
+    <div class="section" id="attendeesSection">
+      <div class="flex-between">
+        <div class="flex-align-center gap-2">
+          <label class="label">Attendees & Recipient Delivery</label>
+          <span id="attendeeCountBadge" class="count-pill">0 detected</span>
+        </div>
+        <button type="button" id="addParticipantBtn" class="btn-text">+ Add Person</button>
+      </div>
+      
+      <div id="participantList" class="participant-list">
+        <!-- Dynamically injected participant rows -->
+      </div>
+    </div>
+
+    <!-- Preferences & Smart Delivery -->
+    <div class="section toggles-box" id="preferencesSection">
+      <label class="toggle-container">
+        <input type="checkbox" id="autoEmailToggle" checked>
+        <span class="toggle-slider"></span>
+        <div class="toggle-text-wrap">
+          <span class="toggle-label-primary">Auto-email Minutes & Action Items</span>
+          <span class="toggle-label-secondary">Generates structured MoM & dispatches email recap</span>
+        </div>
+      </label>
+    </div>
+
+    <!-- Microphone Authorization Helper (shown if mic not yet granted for extension origin) -->
+    <div id="micNoticeBox" class="mic-card hidden">
+      <div class="mic-card-left">
+        <div class="mic-icon-circle">🎙️</div>
+        <div>
+          <p class="mic-card-title">Microphone Access Required</p>
+          <p class="mic-card-sub">Enable mic to capture your local voice along with tab audio</p>
+        </div>
+      </div>
+      <button type="button" id="openMicPermissionBtn" class="btn-mic-allow">Allow Mic</button>
+    </div>
+
+    <!-- Server Connection & Backend Settings (Collapsible) -->
+    <details class="section settings-details">
+      <summary class="settings-summary">
+        <div class="flex-align-center gap-1.5">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+          <span>Backend Connection</span>
+        </div>
+        <span class="server-status-pill" id="serverPingPill">
+          <span class="server-dot" id="serverDot"></span>
+          <span id="serverStatusText">Online</span>
+        </span>
+      </summary>
+      <div class="settings-content">
+        <label class="label-sm" for="backendUrlInput">API Server Endpoint</label>
+        <input type="text" id="backendUrlInput" class="input input-sm" value="http://localhost:8000">
+        <p class="settings-hint">Syncs recordings, Gemini transcripts and AI actions to this host.</p>
+      </div>
+    </details>
+
+    <!-- Notification Alert Box -->
+    <div id="alertBox" class="alert hidden"></div>
+
+    <!-- Interactive Post-Recording Celebration & Synthesis Card -->
+    <div id="synthesisCard" class="synthesis-card hidden">
+      <div class="synthesis-icon-wrap">🎉</div>
+      <h3 class="synthesis-title">Meeting Synthesized!</h3>
+      <p class="synthesis-desc">Gemini completed audio transcription and structured your MoM.</p>
+      
+      <div class="synthesis-stats-pill">
+        <span id="synDuration">22s duration</span> • <span id="synAttendees">2 attendees</span>
+      </div>
+
+      <div class="synthesis-actions">
+        <a id="synNotebookBtn" href="http://localhost:8000/#notebook" target="_blank" class="btn btn-primary btn-sm">
+          <span>👉 Open in Meeting Notebook</span>
+        </a>
+        <div class="synthesis-sub-actions">
+          <button type="button" id="copyMeetingLinkBtn" class="btn btn-secondary btn-sm">
+            <span id="copyLinkIcon">📋</span> <span id="copyLinkText">Copy Link</span>
+          </button>
+          <button type="button" id="startNewMeetingBtn" class="btn btn-secondary btn-sm">
+            <span>↺</span> New Meeting
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Buttons Footer -->
+    <div class="footer" id="mainFooter">
+      <button type="button" id="recordBtn" class="btn btn-primary">
+        <span class="btn-icon">⏺</span>
+        <span class="btn-text-main">Start Recording</span>
+      </button>
+      <a id="dashboardLink" href="http://localhost:8000" target="_blank" class="btn btn-secondary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+        </svg>
+        <span>Open Meeting Notebook</span>
+        <span class="btn-arrow">&rarr;</span>
+      </a>
+    </div>
+
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

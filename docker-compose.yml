@@ -1,0 +1,78 @@
+version: '3.8'
+
+services:
+  # 1. FastAPI Gemini AI Meeting Engine
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: gemini-meeting-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - GEMINI_MODEL=${GEMINI_MODEL:-gemini-2.0-flash}
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/meetings
+      - SMTP_HOST=mailpit
+      - SMTP_PORT=1025
+      - SMTP_USE_TLS=false
+      - SMTP_FROM_EMAIL=meetings@ai-agent.local
+      - STORAGE_DIR=/app/storage
+    volumes:
+      - ./backend/storage:/app/storage
+    depends_on:
+      - postgres
+      - redis
+      - mailpit
+    restart: unless-stopped
+
+  # 2. Open-Source PostgreSQL with pgvector for Semantic Search
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: gemini-meeting-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: meetings
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  # 3. Redis Broker for Task Queue & WebSocket sessions
+  redis:
+    image: redis:7-alpine
+    container_name: gemini-meeting-redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
+  # 4. MinIO S3-Compatible Storage for Raw Audio and PDF Archive
+  minio:
+    image: minio/minio:latest
+    container_name: gemini-meeting-minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadminpassword
+    command: server /data --console-address ":9001"
+    volumes:
+      - miniodata:/data
+    restart: unless-stopped
+
+  # 5. Mailpit Local SMTP Testing Server & Web Inbox
+  # Web UI at http://localhost:8025 to inspect all generated emails and attachments!
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: gemini-meeting-mailpit
+    ports:
+      - "1025:1025"  # SMTP port
+      - "8025:8025"  # Webmail UI
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  miniodata:

@@ -1,0 +1,47 @@
+# Environment & secrets
+.env
+.env.*
+!.env.example
+backend/.env
+backend/.env.*
+!backend/.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+build/
+dist/
+*.egg-info/
+
+# Testing & temp files
+.pytest_cache/
+.coverage
+htmlcov/
+extracted_script.js
+verify_*.html
+fetched_root.html
+*.log
+storage/
+
+# Audio storage (ignore uploads, preserve demo WAV)
+backend/storage/audio_raw/*
+!backend/storage/audio_raw/demo_meeting_audio.wav
+backend/storage/pdf_reports/*
+
+# Databases & local journals
+*.db-journal
+*.sqlite3-journal
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
