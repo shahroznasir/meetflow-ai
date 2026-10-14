@@ -526,7 +526,11 @@ def download_extension_zip():
             break
     
     if not extension_dir:
-        raise HTTPException(status_code=404, detail="Extension directory not found on server")
+        from fastapi.responses import RedirectResponse
+        return RedirectResponse(
+            url="https://github.com/shahroznasir/meetflow-ai/archive/refs/heads/main.zip",
+            status_code=302
+        )
 
     zip_buffer = io.BytesIO()
     with zipfile.ZipFile(zip_buffer, "w", zipfile.ZIP_DEFLATED) as zip_file:
