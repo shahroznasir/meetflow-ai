@@ -512,14 +512,20 @@ def health_check():
 @app.get("/api/v1/extension/download")
 def download_extension_zip():
     """Packages the Chrome Extension into an in-memory zip file and streams it for one-click download."""
-    # Find the extension folder relative to backend
-    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-    extension_dir = os.path.join(base_dir, "extension")
-    if not os.path.isdir(extension_dir):
-        # Fallback if running directly from project root or different cwd
-        extension_dir = os.path.abspath(os.path.join(os.getcwd(), "extension"))
+    # Find the extension folder across project structure
+    candidates = [
+        os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "extension")),
+        os.path.abspath(os.path.join(os.getcwd(), "extension")),
+        os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "extension")),
+        os.path.abspath(os.path.join(os.path.dirname(__file__), "extension"))
+    ]
+    extension_dir = None
+    for c in candidates:
+        if os.path.isdir(c):
+            extension_dir = c
+            break
     
-    if not os.path.isdir(extension_dir):
+    if not extension_dir:
         raise HTTPException(status_code=404, detail="Extension directory not found on server")
 
     zip_buffer = io.BytesIO()
