@@ -204,8 +204,17 @@
       </summary>
       <div class="settings-content">
         <label class="label-sm" for="backendUrlInput">API Server Endpoint</label>
-        <input type="text" id="backendUrlInput" class="input input-sm" value="http://localhost:8000">
+        <input type="text" id="backendUrlInput" class="input input-sm" value="https://meetflow-ai-nine.vercel.app">
+        <div class="template-chips" style="margin-top: 6px;">
+          <button type="button" class="chip" id="presetVercelBtn" style="font-size: 10px; padding: 2px 8px;">☁️ Vercel Cloud</button>
+          <button type="button" class="chip" id="presetLocalBtn" style="font-size: 10px; padding: 2px 8px;">💻 Local (8000)</button>
+        </div>
         <p class="settings-hint">Syncs recordings, Gemini transcripts and AI actions to this host.</p>
+        
+        <div style="margin-top: 10px; padding-top: 8px; border-top: 1px solid #f1f5f9; display: flex; align-items: center; justify-content: space-between;">
+          <span style="font-size: 11px; font-weight: 600; color: #475569;">💬 Live In-Call Captions HUD</span>
+          <span style="font-size: 10px; font-weight: 700; color: #7c3aed; background: #ede9fe; padding: 2px 8px; border-radius: 9999px;">Active</span>
+        </div>
       </div>
     </details>
 

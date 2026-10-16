@@ -22,7 +22,9 @@
 | Capability | Description |
 | :--- | :--- |
 | **🎙️ Multi-Speaker Ingestion** | In-browser dual-channel mixing (remote tab audio + host microphone) via a Manifest V3 Chrome Extension. Also supports direct `.mp3`, `.wav`, `.webm` file uploads and 8kHz $\mu$-law telephony streams. |
-| **🤖 Gemini 2.0 Synthesis** | Automated extraction of executive summaries, key decisions, speaker talk-time analytics, sentiment breakdown, and high-priority action items. |
+| **💬 Live In-Call Floating HUD** | Sleek glassmorphism overlay directly inside Google Meet & Teams. Streams real-time speech-to-text captions, animated voice equalizer, and one-click in-call bookmarking. |
+| **⚡ Real-Time AI Radar** | Instant in-meeting detection of commitments, action items, and key decisions as they are uttered in conversation. |
+| **🤖 Gemini 2.5 Synthesis** | Automated extraction of executive summaries, key decisions, speaker talk-time analytics, sentiment breakdown, and high-priority action items. |
 | **⚡ Ask Aura AI Co-Pilot** | Interactive chatbot grounded in your meeting transcript. Ask questions like *"Draft a follow-up email"*, *"Extract blockers"*, or *"What did David commit to?"* with exact timestamp citations (`[00:01:24]`). |
 | **⏱️ Click-to-Seek Playback** | Synchronized audio player allows you to click any sentence or timestamp in the transcript to jump audio playback instantly with sub-second precision. |
 | **📧 Automated Recaps & Calendar Invites** | Dispatches branded HTML meeting recaps to attendees with attached corporate PDF minutes (ReportLab) and calendar `.ics` action item invites. |
@@ -109,9 +111,10 @@ meetflow-ai/
 │   ├── offscreen/                   # Web Audio API dual-channel stereo mixer
 │   │   ├── offscreen.html
 │   │   └── offscreen.js
-│   ├── content_scripts/             # Meeting DOM scrapers (Meet & Teams)
-│   │   ├── meet_observer.js
-│   │   └── teams_observer.js
+│   ├── content_scripts/             # In-call overlays & DOM observers
+│   │   ├── incall_ui.js             # Live In-Call Floating HUD, Real-Time Captions & AI Radar
+│   │   ├── meet_observer.js         # Google Meet attendee & title scraper
+│   │   └── teams_observer.js        # Microsoft Teams roster scraper
 │   └── permission/                  # One-time mic authorization page
 │
 ├── tests/                           # Complete automated test suite (12/12 passing)

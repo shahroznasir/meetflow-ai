@@ -297,11 +297,37 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
+  const presetVercelBtn = document.getElementById('presetVercelBtn');
+  const presetLocalBtn = document.getElementById('presetLocalBtn');
+
   chrome.storage.local.get(['backendUrl'], (res) => {
-    if (res.backendUrl) backendUrlInput.value = res.backendUrl;
+    if (res.backendUrl) {
+      backendUrlInput.value = res.backendUrl;
+    } else {
+      backendUrlInput.value = 'https://meetflow-ai-nine.vercel.app';
+      chrome.storage.local.set({ backendUrl: backendUrlInput.value });
+    }
     dashboardLink.href = backendUrlInput.value;
     checkBackendHealth(backendUrlInput.value);
   });
+
+  if (presetVercelBtn) {
+    presetVercelBtn.addEventListener('click', () => {
+      backendUrlInput.value = 'https://meetflow-ai-nine.vercel.app';
+      chrome.storage.local.set({ backendUrl: backendUrlInput.value });
+      dashboardLink.href = backendUrlInput.value;
+      checkBackendHealth(backendUrlInput.value);
+    });
+  }
+
+  if (presetLocalBtn) {
+    presetLocalBtn.addEventListener('click', () => {
+      backendUrlInput.value = 'http://localhost:8000';
+      chrome.storage.local.set({ backendUrl: backendUrlInput.value });
+      dashboardLink.href = backendUrlInput.value;
+      checkBackendHealth(backendUrlInput.value);
+    });
+  }
 
   backendUrlInput.addEventListener('change', () => {
     chrome.storage.local.set({ backendUrl: backendUrlInput.value });
